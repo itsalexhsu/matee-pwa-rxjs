@@ -1,0 +1,26 @@
+[
+  {
+    "id": "0000-0000-0000-0000",
+    "externalId": "",
+    "name": "A rainy Chicago evening",
+    "description": "Friend whom I met from Elbrus is visiting Chicago on a stormy spring-like weather",
+    "recordDate": 1526361160,
+    "locationLabel": "Chicago, IL",
+    "locationLatitude": 41.8781,
+    "locationLongitude": 87.6298,
+    "source": "",
+    "imageURL": "http://dwxywuoa786l.cloudfront.net/files/e/d/8/ed8ed45f5b9f0576d8828d7750b8ad16_article_image_195128-640.jpg"
+  },
+  {
+    "id": "0000-0000-0000-0000",
+    "externalId": "",
+    "name": "Preparing for Asado Argentino",
+    "description": "This will be the first major event hosted by the Chicago Materos",
+    "recordDate": 1526677861,
+    "locationLabel": "Chicago, IL",
+    "locationLatitude": 41.8781,
+    "locationLongitude": 87.6298,
+    "source": "",
+    "imageURL": "http://dwxywuoa786l.cloudfront.net/files/e/d/8/ed8ed45f5b9f0576d8828d7750b8ad16_article_image_195128-640.jpg"
+  }
+]

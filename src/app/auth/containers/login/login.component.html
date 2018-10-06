@@ -1,0 +1,21 @@
+<mat-toolbar class="header">
+  <span></span>
+  <span></span>
+  <span>
+    <button mat-icon-button [routerLink]="['/']">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+
+<mat-card class="mat-elevation-z0">
+  <h1>Sign In</h1>
+  <p>Sign In to retrieve &amp; synch entries across all your devices.</p>
+  <app-login-form [pending]='$pending | async' (submitted)="login($event)"></app-login-form>
+</mat-card>
+
+<div class="footer">
+  <mat-card class="mat-elevation-z0">
+    <p>Don't have an account? <a [routerLink]="['/signup']">Sign Up</a></p>
+  </mat-card>
+</div>

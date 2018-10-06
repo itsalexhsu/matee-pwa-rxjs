@@ -1,0 +1,21 @@
+<mat-toolbar class="header">
+  <span></span>
+  <span></span>
+  <span>
+    <button mat-icon-button [routerLink]="['/']">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+
+<mat-card class="mat-elevation-z0">
+  <h1>Enter Your Name</h1>
+  <p>So we know who to call you</p>
+  <app-name-form (submitted)='submit($event)'></app-name-form>
+</mat-card>
+
+<div class="footer">
+  <mat-card class="mat-elevation-z0">
+    <p><a [routerLink]="['/login']">Back to Log In</a></p>
+  </mat-card>
+</div>

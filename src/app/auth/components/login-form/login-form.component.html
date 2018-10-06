@@ -1,0 +1,27 @@
+<form [formGroup]="form" class="list" (ngSubmit)='submit()'>
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="email"
+      name="email"
+      type='email'
+      placeholder="Email Address">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+    matInput
+    formControlName="password"
+    name="password"
+    type="password"
+    placeholder="Password">
+  </mat-form-field>
+  <p><a [routerLink]="['/forgot-password']">Forgot Password?</a></p>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="mat-elevation-z0"
+    [disabled]='!form.valid || pending'>
+    Login
+  </button>
+</form>

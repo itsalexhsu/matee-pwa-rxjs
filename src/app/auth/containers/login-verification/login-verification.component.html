@@ -1,0 +1,19 @@
+<div class="modal">
+  <mat-toolbar class="header">
+    <span></span>
+    <span></span>
+    <span>
+      <button mat-icon-button [routerLink]="['/']">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+
+  <mat-card class="mat-elevation-z0">
+    <h1>Verify Your Identity</h1>
+    <p>Looks like we don't recognize your current device. Please enter the verification code sent to your phone to verify your identity.</p>
+
+    <app-verification-form (submitted)='submit($event)'></app-verification-form>
+
+  </mat-card>
+</div>

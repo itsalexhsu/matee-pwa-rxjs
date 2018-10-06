@@ -1,0 +1,51 @@
+<div class="header">
+  <mat-toolbar>
+    <span></span>
+    <span>Review Order</span>
+    <span>
+      <button mat-icon-button [routerLink]="['/']">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+</div>
+
+<mat-card class="mat-elevation-z0">
+    <mat-card-content>
+        <h3>Organic Pure-Leaf Yerba Mate</h3>
+        <p>Organic Yerba Mate sourced from Misiones in Argentina.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
+    </mat-card-actions>
+  </mat-card>
+  <mat-divider></mat-divider>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+      <h3>Sage Leaf</h3>
+      <p><strong>Possibly effective for:</strong> Alzheimer's disease. Mental performance. High cholesterol. Memory. Menopausal symptoms.</p>
+      <p><strong>Flavor Profile:</strong> Aromatic. Bitter. Fragrant. Savory.</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
+    <button mat-stroked-button color="warn">Remove Ingredient</button>
+  </mat-card-actions>
+</mat-card>
+<mat-divider></mat-divider>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+      <h3>Rosemary Leaf</h3>
+      <p><strong>Flavor Profile:</strong> Peppery. Piney. Pungent. Woody.</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
+    <button mat-stroked-button color="warn">Remove Ingredient</button>
+  </mat-card-actions>
+</mat-card>
+<mat-divider></mat-divider>
+
+<mat-card class="mat-elevation-z0">
+    <button class="fab-button" mat-flat-button color="primary">Confirm</button>
+  </mat-card>

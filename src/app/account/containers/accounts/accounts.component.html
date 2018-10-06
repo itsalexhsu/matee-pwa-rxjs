@@ -1,0 +1,22 @@
+<mat-toolbar class="header">
+  <span></span>
+  <span>Profile</span>
+  <span>
+    <button mat-icon-button [routerLink]="['']">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+
+<mat-list>
+  <app-account-form [user]='user$ | async'></app-account-form>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Logins</h3>
+  <mat-list-item>
+    <button
+      mat-button
+      (click)="logout()">
+      Log Out
+    </button>
+  </mat-list-item>
+</mat-list>

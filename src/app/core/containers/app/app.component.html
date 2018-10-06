@@ -1,0 +1,14 @@
+<router-outlet></router-outlet>
+
+<app-cart-button [show]="showCartButton$ | async">
+    <!-- Go To Cart Fab Button-->
+</app-cart-button>
+
+<app-layout>
+    <app-footer [show]="showFooter$ | async">
+        <app-footer-item routerlink='/' icon='home'></app-footer-item>
+        <app-footer-item routerlink='/blends' icon='stars'></app-footer-item>
+        <app-footer-item *ngIf='isLoggedIn$ | async' routerlink='/account' icon='person'></app-footer-item>
+        <app-footer-item *ngIf='!(isLoggedIn$ | async)' routerlink='/login' icon='person'></app-footer-item>
+    </app-footer>
+</app-layout>

@@ -1,0 +1,21 @@
+<mat-toolbar class="header">
+  <span></span>
+  <span></span>
+  <span>
+    <button mat-icon-button [routerLink]="['/']">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+
+<mat-card class="mat-elevation-z0">
+  <h1>Verify Your Number</h1>
+  <p>A verification code was sent to your phone</p>
+  <app-verification-form (submitted)='verify($event)'></app-verification-form>
+</mat-card>
+
+<div class="footer">
+  <mat-card class="mat-elevation-z0">
+    <p>Already have an account? <a [routerLink]="['/login']">Sign In</a></p>
+  </mat-card>
+</div>

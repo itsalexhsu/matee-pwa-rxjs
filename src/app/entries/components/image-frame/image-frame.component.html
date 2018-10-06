@@ -1,0 +1,12 @@
+<div class="header">
+<mat-toolbar class="transparent">
+    <span><button mat-button (click)="cancel.emit(true)">Cancel</button></span>
+    <span><h1 class="title">Preview</h1></span>
+    <span><button mat-button (click)="newImage.emit(image)">Next</button></span>
+    <!-- <span *ngIf="$edited | async"><button mat-button (click)="onSaved()">Done</button></span> -->
+</mat-toolbar>
+</div>
+
+<div class="image-container" *ngIf="resource">
+    <img #img [src]="domSanitizer.bypassSecurityTrustUrl( image )">
+</div>

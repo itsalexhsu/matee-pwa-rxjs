@@ -1,0 +1,37 @@
+<div class="modal">
+  <div class="header">
+    <mat-toolbar class="header">
+      <span><button mat-icon-button (click)="debouncer.next('')"><mat-icon>near_me</mat-icon></button></span>
+      <span>Locations</span>
+      <span><button mat-button (click)="close.emit(true)">Cancel</button></span>
+    </mat-toolbar>
+  </div>
+
+  <div class="padding">
+    <div class="list">
+      <mat-form-field>
+        <input
+          #input
+          matInput
+          (keyup)="debouncer.next($event.target.value)"
+          placeholder="Search">
+        <button
+          mat-button
+          matSuffix
+          mat-icon-button
+          (click)='input.value=""'>
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-list>
+        <mat-list-item (click)="selectedLocation.emit(location); close.emit(true)"  *ngFor="let location of locations">
+        <h4 mat-line>{{location.name}}</h4>
+        <p mat-line *ngIf="location.vicinity">{{location.vicinity}}</p>
+        <p mat-line *ngIf="location.formatted_address">{{location.formatted_address}}</p>
+      </mat-list-item>
+      </mat-list>
+
+    </div>
+  </div>
+</div>

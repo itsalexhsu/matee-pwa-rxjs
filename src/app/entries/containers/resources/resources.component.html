@@ -1,0 +1,42 @@
+<div class="header">
+  <mat-toolbar>
+    <span></span>
+    <span>Matee</span>
+    <span></span>
+  </mat-toolbar>
+</div>
+
+<div>
+
+  <!-- Welcome -->
+  <mat-card class="mat-elevation-z0">
+    <mat-card-content>
+        <h2>Welcome to your companion app!</h2>
+        <p>Use this app to save or discover Yerba Mate blends!</p>
+        <p>In addition, you will also find brewing guide, brew timer, and other useful features</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-divider></mat-divider>
+
+  <mat-card class="mat-elevation-z0">
+      <mat-card-content>
+        <h3>Christmas blend is here!</h3>
+        <p>Check-out the latest Christmas blend, it has a warm, woody, cinnamon toast flavor that'll warm up your night and get you excited for the season!</p>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-button>Add Item</button>
+          <button mat-button [routerLink]="['/123456']">View Detail</button>
+      </mat-card-actions>
+    </mat-card>
+  
+    <mat-divider></mat-divider>
+  
+  </div>
+
+<!-- <div class="list timeline">
+  <app-resource-preview
+  *ngFor="let resource of resources$ | async"
+  [resource]="resource">
+  </app-resource-preview>
+</div> -->

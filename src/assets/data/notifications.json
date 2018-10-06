@@ -1,0 +1,15 @@
+{
+  "notifications": [
+    {
+      "title": "Welcome!",
+      "body": "Hello stranger! We're so glad to have you here, get started by adding your first entires using the button below.",
+      "for": "newUser"
+    },{
+      "title": "Sign Up!",
+      "body": "Looks like you've added some entries. Sign Up to access your entries from other devices!",
+      "for": "activatedUser",
+      "cta": "Sign Up",
+      "link": "/signup"
+    }
+  ]
+}

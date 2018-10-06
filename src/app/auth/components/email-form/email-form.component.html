@@ -1,0 +1,18 @@
+<form class="list" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <input
+      matInput
+      name="email"
+      formControlName="email"
+      type='email'
+      placeholder="Email Address">
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    class="mat-elevation-z0"
+    [disabled]='!form.valid'
+    type="submit">
+    Next
+  </button>
+</form>

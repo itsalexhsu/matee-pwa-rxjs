@@ -1,0 +1,44 @@
+.header {
+  flex: 1;
+  display: flex;
+}
+
+.header span {
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.header span:first-child {
+  text-align: left;
+}
+
+.header span:last-child {
+  text-align: right;
+}
+
+.header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.header .spinner {
+  display: table-cell;
+}
+
+.header .spinner > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header .transparent {
+  background: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.header .transparent * {
+  color: white;
+}

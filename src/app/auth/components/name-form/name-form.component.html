@@ -1,0 +1,17 @@
+<form [formGroup]="form" class="list" (ngSubmit)="submit()">
+  <mat-form-field>
+    <input
+    matInput
+    name="name"
+    formControlName="name"
+    placeholder="Your Name">
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="mat-elevation-z0"
+    [disabled]='!form.valid'>
+    Enter
+  </button>
+</form>

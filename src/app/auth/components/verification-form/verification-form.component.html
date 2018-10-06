@@ -1,0 +1,19 @@
+<form [formGroup]="form" class="list" (ngSubmit)="submit()">
+  <mat-form-field>
+    <input
+    name="verificationCode"
+    formControlName="verificationCode"
+    minlength="6"
+    matInput
+    placeholder="Enter the 6-digit verification code"
+    required>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="mat-elevation-z0"
+    [disabled]='!form.valid'>
+    Verify
+  </button>
+</form>
