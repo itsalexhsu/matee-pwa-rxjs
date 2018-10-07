@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z0">
+  <img
+  mat-card-image 
+  [src]="blend.images[0].src"
+  [alt]="blend.images[0].altText">
+  <mat-card-content>
+    <h1>{{blend.title}}</h1>
+    <mat-card-subtitle>
+      <span
+        *ngIf='showCreateDate'>{{blend.createdAt | date:'longDate' }}</span>
+    </mat-card-subtitle>
+    <p>{{blend.description}}</p>
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>

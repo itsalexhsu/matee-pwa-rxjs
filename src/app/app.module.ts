@@ -23,6 +23,7 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { EntriesModule } from './entries/entries.module';
 import { AccountModule } from './account/account.module';
+import { SharedModule } from './shared/shared.module';
 
 // Services
 import { CustomRouterStateSerializer } from './shared/utils';
@@ -44,6 +45,7 @@ import { environment } from '../environments/environment';
     AuthModule.forRoot(),
     CoreModule.forRoot(),
     EntriesModule.forRoot(),
+    SharedModule.forRoot(),
     DeviceDetectorModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     /**

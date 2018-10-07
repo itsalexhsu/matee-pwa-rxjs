@@ -1,16 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material';
 
-import { Store } from '@ngrx/store';
-import { from } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import * as fromEntries from '../../reducers/';
-import * as resource from '../../actions/resource';
-
-import { Resource } from '../../models/resource.model';
-
-import { ArchiveConfirmationComponent } from '../../dialog/archive-confirmation/archive-confirmation.component'
+import * as blends from '../../actions/blends';
 
 import { PouchdbService } from '../../../core/services/pouchdb';
 
@@ -21,11 +19,14 @@ import { PouchdbService } from '../../../core/services/pouchdb';
 })
 export class ResourceDetailComponent {
 
+  blend$: Observable<any[]> = this.store.pipe(select(fromEntries.getBlendResult))
+
   constructor(
-    private domSanitizer: DomSanitizer,
-    private store: Store<fromEntries.State>,
-    private dialog: MatDialog,
-    private pouchDb: PouchdbService,
-  ) { }
+    private activeRoute: ActivatedRoute,
+    private store: Store<fromEntries.State>) {
+      this.activeRoute.params
+      .pipe(map(params => new blends.Load(params.id)))
+      .subscribe(store)
+    }
 
 }

@@ -1,0 +1,28 @@
+<mat-card class="mat-elevation-z0">
+  <mat-card-content
+    [routerLink]="['', id]">
+    <h3>{{title}}</h3>
+    <p>{{description}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-icon-button
+      color="primary"
+      *ngIf='showAddItem'>
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      *ngIf='showAddFavorite'>
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+        mat-icon-button
+        color="warn"
+        *ngIf='showRemoveFavorite'>
+        <mat-icon>favorite</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+<mat-divider></mat-divider>

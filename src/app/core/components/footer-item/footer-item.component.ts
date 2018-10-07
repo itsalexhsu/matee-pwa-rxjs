@@ -5,7 +5,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   templateUrl: './footer-item.component.html',
   styleUrls: ['./footer-item.component.scss']
 })
-export class FooterItemComponent implements OnInit {
+export class FooterItemComponent {
   
   @Input() icon: string
   @Input() routerlink: string | any[] = '/'

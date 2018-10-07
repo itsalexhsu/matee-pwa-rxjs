@@ -1,13 +1,8 @@
-<mat-card class="mat-elevation-z0">
-  <mat-card-content>
-    <h1>Christmas Blend</h1>
-    <mat-card-subtitle>
-      <span>Created April 1, 2018</span>
-    </mat-card-subtitle>
-    <p>This warm and woody blend with hint of cinnamon will light up your day and get you ready for the holiday season!</p>
-  </mat-card-content>
-</mat-card>
-<mat-divider></mat-divider>
+
+<app-blend-summary
+  [blend]='blend$ | async'
+  [showCreateDate]='false'>
+</app-blend-summary>
 
 <mat-card class="mat-elevation-z0">
   <mat-card-subtitle>Brewing Guide</mat-card-subtitle>
@@ -56,6 +51,10 @@
     </mat-card-actions>
   </mat-card>
   <mat-divider></mat-divider>
+
+  <app-select-size-card
+    [blend]='blend$ | async'>
+  </app-select-size-card>
 
   <mat-card class="mat-elevation-z0">
     <button class="fab-button" mat-flat-button color="primary">Add Item</button>

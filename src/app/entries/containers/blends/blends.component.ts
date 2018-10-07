@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import { tap, map, mergeMap } from 'rxjs/operators';
-
 import { Observable } from 'rxjs';
 
 import * as fromEntries from '../../reducers/';
@@ -18,14 +17,14 @@ import * as cartButton from '../../../core/actions/cart-button';
 })
 export class BlendsComponent implements OnInit {
 
-  blends$: Observable<any[]> = this.store.pipe(select(fromEntries.getBlendResult))
+  blends$: Observable<any[]> = this.store.pipe(select(fromEntries.getBlendsResult))
 
   constructor(
     private store: Store<fromEntries.State>,
   ) {
     this.store.dispatch(new layout.ShowFooter())
     this.store.dispatch(new cartButton.ShowButton())
-    this.store.dispatch(new blends.Load())
+    this.store.dispatch(new blends.List())
   }
 
   ngOnInit() {

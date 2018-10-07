@@ -24,6 +24,7 @@ const CONTAINER = [
   LayoutComponent,
   AppComponent,
   AddPhotoComponent,
+  CartButtonComponent,
 ]
 
 @NgModule({
@@ -33,7 +34,7 @@ const CONTAINER = [
     RouterModule,
     EffectsModule.forFeature([SnackbarEffects, PouchDbEffects]),
   ],
-  declarations: [CONTAINER, CartButtonComponent],
+  declarations: [CONTAINER],
   exports: [CONTAINER]
 })
 export class CoreModule {

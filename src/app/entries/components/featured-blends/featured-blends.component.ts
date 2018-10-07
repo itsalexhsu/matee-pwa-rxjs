@@ -21,6 +21,14 @@ export class FeaturedBlendsComponent {
     return this.blend.description
   }
 
+  get image() {
+    return this.blend.images[0].src
+  }
+
+  get altText() {
+    return this.blend.images[0].altText
+  }
+
   constructor() { }
 
   ngOnInit() {

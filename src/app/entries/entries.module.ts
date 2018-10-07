@@ -30,6 +30,7 @@ import { FeaturedBlendsComponent } from './components/featured-blends/featured-b
 import { PreviousBlendsComponent } from './components/previous-blends/previous-blends.component';
 import { CreateBlendsComponent } from './components/create-blends/create-blends.component';
 import { FavoriteBlendsComponent } from './components/favorite-blends/favorite-blends.component';
+import { BlendSummaryComponent } from './components/blend-summary/blend-summary.component';
 
 import { ArchiveConfirmationComponent } from './dialog/archive-confirmation/archive-confirmation.component';
 
@@ -41,6 +42,7 @@ import { routes } from './routes';
 import { PipesModule } from '../shared/pipes';
 import { OrientationPipe } from "../shared/pipes/resetOrientation";
 import { ToBase64Pipe } from '../shared/pipes/fileToBase64';
+import { SharedModule } from '../shared/shared.module';
 
 const COMPONENTS = [
   ArchiveConfirmationComponent,
@@ -60,6 +62,7 @@ const COMPONENTS = [
   PreviousBlendsComponent,
   CreateBlendsComponent,
   FavoriteBlendsComponent,
+  BlendSummaryComponent,
 ]
 
 @NgModule({
@@ -68,6 +71,7 @@ const COMPONENTS = [
     ReactiveFormsModule,
     MaterialModule,
     PipesModule,
+    SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('entries', reducers),
     EffectsModule.forFeature([EntryEffects, ResourceEffects, LocationEffects, BlendsEffects]),

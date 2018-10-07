@@ -1,15 +1,21 @@
 import { BlendsActionTypes, BlendsActions, } from './../actions/blends';
 
 export interface State {
-  loaded: boolean;
-  loading: boolean;
-  data: any[];
+  blendLoaded: boolean;
+  blendLoading: boolean;
+  blendData: any[];
+  blendsLoaded: boolean;
+  blendsLoading: boolean;
+  blendsData: any[];
 }
 
 const initialState: State = {
-  loaded: false,
-  loading: false,
-  data: [],
+  blendLoaded: false,
+  blendLoading: false,
+  blendsLoaded: false,
+  blendsLoading: false,
+  blendData: [],
+  blendsData: [],
 };
 
 export function reducer(
@@ -17,20 +23,36 @@ export function reducer(
   action: BlendsActions
 ): State {
   switch (action.type) {
-    
+
     case BlendsActionTypes.Load: {
       return {
         ...state,
-        loading: true,
+        blendLoading: true,
       };
     }
 
     case BlendsActionTypes.LoadSuccess: {
       return {
         ...state,
-        loaded: true,
-        loading: false,
-        data: action.payload,
+        blendLoaded: true,
+        blendLoading: false,
+        blendData: action.payload,
+      };
+    }
+    
+    case BlendsActionTypes.List: {
+      return {
+        ...state,
+        blendsLoading: true,
+      };
+    }
+
+    case BlendsActionTypes.ListSuccess: {
+      return {
+        ...state,
+        blendsLoaded: true,
+        blendsLoading: false,
+        blendsData: action.payload,
       };
     }
 
@@ -40,6 +62,10 @@ export function reducer(
   }
 }
 
-export const getBlendsLoaded = (state: State) => state.loaded;
-export const getBlendsLoading = (state: State) => state.loading;
-export const getBlendsResult = (state: State) => state.data;
+export const getBlendLoaded = (state: State) => state.blendLoaded;
+export const getBlendLoading = (state: State) => state.blendLoading;
+export const getBlendResult = (state: State) => state.blendData;
+
+export const getBlendsLoaded = (state: State) => state.blendsLoaded;
+export const getBlendsLoading = (state: State) => state.blendsLoading;
+export const getBlendsResult = (state: State) => state.blendsData;

@@ -134,11 +134,16 @@ export const getArchived = createSelector(
 );
 
 // Blends Reducers
+
 export const blendsPageState = createSelector(
   getEntriesEntityState,
   (state: EntriesState) => state.blends
 );
-export const getBlendResult = createSelector(
+export const getBlendsResult = createSelector(
   blendsPageState,
   fromBlends.getBlendsResult
+);
+export const getBlendResult = createSelector(
+  blendsPageState,
+  fromBlends.getBlendResult
 );

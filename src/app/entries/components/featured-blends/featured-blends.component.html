@@ -1,12 +1,10 @@
-<!-- Featured -->
-<mat-card class="mat-elevation-z0">
-  <mat-card-content>
-    <h3>{{title}}</h3>
-    <p>{{description}}</p>
-  </mat-card-content>
-  <mat-card-actions>
-      <button mat-button>Add Item</button>
-    <button mat-button [routerLink]="['/123456']">View Detail</button>
-  </mat-card-actions>
-</mat-card>
-<mat-divider></mat-divider>
+<app-blend-card
+  [title]='title'
+  [image]='image'
+  [altText]='altText'
+  [id]='id'
+  [description]='description'
+  [showAddItem]='true'
+  [showAddFavorite]='true'
+  [showRemoveFavorite]='false'>
+</app-blend-card>
