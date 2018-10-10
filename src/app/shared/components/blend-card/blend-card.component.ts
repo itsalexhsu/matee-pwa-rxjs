@@ -8,22 +8,35 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class BlendCardComponent {
 
   @Input() id: string
-  @Input() description: string
   @Input() title: string
+  @Input() description: string
   @Input() image: string
   @Input() altText: string
+  @Input() isFavorite: boolean
 
-  @Input() showAddItem: boolean
-  @Input() showAddFavorite: boolean
-  @Input() showRemoveFavorite: boolean
+  @Input() showAddToCart: boolean
+  @Input() showRemoveFromCart: boolean
+  @Input() showFavorite: boolean
 
-  @Output() AddItemId = new EventEmitter()
-  @Output() AddFavoriteId = new EventEmitter()
-  @Output() RemoveFavoriteId = new EventEmitter()
+  @Output() addToCart = new EventEmitter()
+  @Output() removeFromCart = new EventEmitter()
+  @Output() toggleFavorite = new EventEmitter()
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onAddToCartClick(event) {
+    this.addToCart.emit(event)
+  }
+
+  onRemoveFromCartClick(event) {
+    this.removeFromCart.emit(event)
+  }
+
+  onToggleFavoriteClick(event) {
+    this.toggleFavorite.emit(event)
   }
 
 }

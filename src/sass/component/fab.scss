@@ -1,0 +1,19 @@
+.fab {
+    position: fixed;
+    bottom: 80px;
+    right: 40px;
+    z-index: 1000;
+  }
+  
+  .fab > * {
+    text-align: center;
+    overflow: hidden;
+    margin-left: 10px;
+  }
+
+//   .fab {
+//     position: fixed;
+//     bottom: 80px;
+//     right: 40px;
+//     z-index: 1000;
+// }

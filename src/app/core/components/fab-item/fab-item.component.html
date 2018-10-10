@@ -1,0 +1,12 @@
+<button
+    mat-fab
+    color="primary"
+    matBadgeColor="warn"
+    matBadgePosition="after"
+    (click)="onClick(true)"
+    [matBadgeHidden]='hideBadge'
+    [routerLink]="routerlink"
+    [matBadge]="badgeCount"
+    *ngIf='show'>
+    <mat-icon>{{icon}}</mat-icon>
+</button>

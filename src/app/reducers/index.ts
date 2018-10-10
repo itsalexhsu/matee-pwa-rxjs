@@ -24,20 +24,19 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * notation packages up all of the exports into a single object.
  */
 
-import * as fromCartButton from '../core/reducers/cart-button';
+// import * as fromCore from '../core/reducers/core';
+import * as fromCart from '../core/reducers/cart';
 import * as fromLayout from '../core/reducers/layout';
 import * as fromSnackbar from '../core/reducers/snackbar';
-import * as fromPouchdb from '../core/reducers/pouchdb';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  cartButton: fromCartButton.State;
+  cart: fromCart.State;
   layout: fromLayout.State;
   snackbar: fromSnackbar.State;
-  pouchdb: fromPouchdb.State;
   router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -47,10 +46,9 @@ export interface State {
  * and the current or initial state and return a new immutable state.
  */
 export const reducers: ActionReducerMap<State> = {
-  cartButton: fromCartButton.reducer,
+  cart: fromCart.reducer,
   layout: fromLayout.reducer,
   snackbar: fromSnackbar.reducer,
-  pouchdb: fromPouchdb.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -85,14 +83,44 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
  * Layout Reducers
  */
 
-export const getCartButtonState = createFeatureSelector<fromCartButton.State>('cartButton');
+export const getCartState = createFeatureSelector<fromCart.State>('cart');
 
-export const getCartButton = createSelector(
-  getCartButtonState,
-  fromCartButton.getShowButton
+export const getNewLineItem = createSelector(
+  getCartState,
+  fromCart.getNewLineItem
 );
 
+export const getRemovedItem = createSelector(
+  getCartState,
+  fromCart.getRemovedItem
+);
+
+export const getShowCart = createSelector(
+  getCartState,
+  fromCart.getShowCart
+);
+
+
+/**
+ * Layout Reducers
+ */
+
 export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
+
+export const getAddItemButton = createSelector(
+  getLayoutState,
+  fromLayout.getAddItemButton
+);
+
+export const getShowCartButton = createSelector(
+  getLayoutState,
+  fromLayout.getShowCartButton
+);
+
+export const getShowCheckoutButton = createSelector(
+  getLayoutState,
+  fromLayout.getShowCheckoutButton
+);
 
 export const getShowFooter = createSelector(
   getLayoutState,
@@ -105,12 +133,3 @@ export const getShowSnackbar = createSelector(
   getSnackbarState,
   fromSnackbar.getShowSnackbar
 );
-
-export const getPouchdbState = createFeatureSelector<fromPouchdb.State>('pouchdb');
-
-export const getPouchDBDestroyed = createSelector(
-  getPouchdbState,
-  fromPouchdb.getDBDestroyed
-);
-
-

@@ -6,31 +6,23 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 //Effects
-import { EntryEffects } from './effects/entry';
-import { ResourceEffects } from './effects/resource';
-import { LocationEffects } from "./effects/location";
 import { BlendsEffects } from "./effects/blends";
 
 //Containers
 import { ResourcesComponent } from './containers/resources/resources.component';
 import { ViewResourceComponent } from './containers/view-resource/view-resource.component';
-import { AddResourceComponent } from './containers/add-resource/add-resource.component';
-import { EditResourcePhotoComponent } from './containers/edit-resource-photo/edit-resource-photo.component';
 import { ResourceDetailComponent } from './containers/resource-detail/resource-detail.component';
 import { BlendsComponent } from './containers/blends/blends.component';
 import { IngredientListComponent } from './containers/ingredient-list/ingredient-list.component';
-import { CartComponent } from './containers/cart/cart.component';
+import { FeaturedBlendsComponent } from './containers/featured-blends/featured-blends.component';
 
 //Components
-import { AddLocationComponent } from './components/add-location/add-location.component';
-import { ImageFrameComponent } from './components/image-frame/image-frame.component';
-import { EditImageFormComponent } from './components/edit-image-form/edit-image-form.component';
-import { ResourcePreviewComponent } from './components/resource-preview/resource-preview.component';
-import { FeaturedBlendsComponent } from './components/featured-blends/featured-blends.component';
 import { PreviousBlendsComponent } from './components/previous-blends/previous-blends.component';
 import { CreateBlendsComponent } from './components/create-blends/create-blends.component';
 import { FavoriteBlendsComponent } from './components/favorite-blends/favorite-blends.component';
 import { BlendSummaryComponent } from './components/blend-summary/blend-summary.component';
+import { SelectSizeCardComponent } from './components/select-size-card/select-size-card.component';
+import { BlendDetailComponent } from './components/blend-detail/blend-detail.component';
 
 import { ArchiveConfirmationComponent } from './dialog/archive-confirmation/archive-confirmation.component';
 
@@ -46,23 +38,18 @@ import { SharedModule } from '../shared/shared.module';
 
 const COMPONENTS = [
   ArchiveConfirmationComponent,
-  AddLocationComponent,
-  ImageFrameComponent,
-  EditImageFormComponent,
   ResourcesComponent,
   ViewResourceComponent,
   ResourceDetailComponent,
-  ResourcePreviewComponent,
-  AddResourceComponent,
-  EditResourcePhotoComponent,
   BlendsComponent,
   IngredientListComponent,
-  CartComponent,
   FeaturedBlendsComponent,
   PreviousBlendsComponent,
   CreateBlendsComponent,
   FavoriteBlendsComponent,
   BlendSummaryComponent,
+  SelectSizeCardComponent,
+  BlendDetailComponent,
 ]
 
 @NgModule({
@@ -74,7 +61,7 @@ const COMPONENTS = [
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('entries', reducers),
-    EffectsModule.forFeature([EntryEffects, ResourceEffects, LocationEffects, BlendsEffects]),
+    EffectsModule.forFeature([BlendsEffects]),
   ],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],

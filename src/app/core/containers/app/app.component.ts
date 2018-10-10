@@ -5,14 +5,13 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
-import { FindUserAttributeValue } from '../../../shared/utils';
 
 import * as fromAuth from '../../../auth/reducers';
 import * as fromRoot from '../../../reducers';
-import * as auth from '../../../auth/actions/auth';
 import * as layout from '../../actions/layout';
-import * as cartButton from '../../actions/cart-button';
-import * as pouchDB from '../../actions/pouchdb';
+import * as cart from '../../actions/cart';
+
+import { GlobalService, LineItem } from '../../../shared'
 
 @Component({
   selector: 'app-root',
@@ -22,28 +21,44 @@ import * as pouchDB from '../../actions/pouchdb';
 })
 export class AppComponent {
 
+  lineItems: LineItem[] = []
+
+  showFooter$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowFooter))
+  showCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCartButton))
+  showAddCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getAddItemButton))
+  showCheckoutButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCheckoutButton))
+
   user$: Observable<CognitoUserAttribute[]> = this.store.pipe(select(fromAuth.getUserAttributes))
   isLoggedIn$: Observable<boolean> = this.store.pipe(select(fromAuth.getAuthenticated))
-  showFooter$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowFooter))
-  showCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getCartButton))
+
+  newLineItem$: Observable<LineItem> = this.store.pipe(select(fromRoot.getNewLineItem))
+  removedLineItem$: Observable<LineItem> = this.store.pipe(select(fromRoot.getRemovedItem))
+
+  showCart$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCart))
 
   ngOnInit() {
     this.store.dispatch(new layout.ShowFooter)
-    this.store.dispatch(new cartButton.ShowButton)
+    this.store.dispatch(new layout.showCartButton)
+    this.store.dispatch(new layout.hideAddItemButton)
 
-    this.isLoggedIn$
+    // From AddItem
+    this.newLineItem$
     .pipe(map(payload => payload))
-    .subscribe(loggedIn => {
-      if (loggedIn) {
-        this.store.dispatch(new auth.LoadUser)
+    .subscribe((lineItem: LineItem) => {
+      if (lineItem) {
+        this.lineItems.push(lineItem)
       }
     })
 
-    this.user$
+    // From AddItemToCart & RemoveItem
+    this.removedLineItem$
     .pipe(map(payload => payload))
-    .subscribe(params => {
-      if (params) {
-        this.store.dispatch(new pouchDB.SyncDB())
+    .subscribe((lineItem: LineItem) => {
+      if (lineItem) {
+        let index = this.lineItems.indexOf(lineItem)
+        if (index!=-1) {
+          this.lineItems.splice(index, 1)
+        }
       }
     })
 
@@ -51,6 +66,13 @@ export class AppComponent {
 
   constructor(
     private store: Store<fromRoot.State>,
+    private globalService: GlobalService,
   ) { }
+
+  showCart(event) {
+    if (event) {
+      this.store.dispatch(new cart.Open)
+    }
+  }
 
 }

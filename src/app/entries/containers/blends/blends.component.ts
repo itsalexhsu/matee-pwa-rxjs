@@ -5,9 +5,8 @@ import { tap, map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import * as fromEntries from '../../reducers/';
-import * as blends from '../../actions/blends';
+import * as product from '../../actions/product';
 import * as layout from '../../../core/actions/layout';
-import * as cartButton from '../../../core/actions/cart-button';
 
 @Component({
   selector: 'app-blends',
@@ -23,8 +22,9 @@ export class BlendsComponent implements OnInit {
     private store: Store<fromEntries.State>,
   ) {
     this.store.dispatch(new layout.ShowFooter())
-    this.store.dispatch(new cartButton.ShowButton())
-    this.store.dispatch(new blends.List())
+    this.store.dispatch(new layout.showCartButton())
+    this.store.dispatch(new layout.hideAddItemButton())
+    this.store.dispatch(new product.List())
   }
 
   ngOnInit() {

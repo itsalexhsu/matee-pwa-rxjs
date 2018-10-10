@@ -15,34 +15,26 @@
 <mat-tab-group mat-stretch-tabs>
   
   <mat-tab label="Featured">
-    <ng-template matTabContent>
       <app-featured-blends
         *ngFor="let blend of blends$ | async"
         [blend]='blend'>
-        <!-- Featured Blend Content -->
+        <!-- Featured Blends -->
       </app-featured-blends>
-    </ng-template>
   </mat-tab>
   <mat-tab label="Create">
-    <ng-template matTabContent>
       <app-create-blends>
         <!-- Create Blends -->
       </app-create-blends>
-    </ng-template>
   </mat-tab>
   <mat-tab label="Favorites">
-    <ng-template matTabContent>
       <app-favorite-blends>
         <!-- Favorite Blends -->
       </app-favorite-blends>
-    </ng-template>
   </mat-tab>
   <mat-tab label="Previous">
-    <ng-template matTabContent>
       <app-previous-blends>
         <!-- Previous Blends -->
       </app-previous-blends>
-    </ng-template>
   </mat-tab>
 
 </mat-tab-group>

@@ -6,29 +6,29 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of, from } from 'rxjs';
 import { map, catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 
-import { ShopifyService } from '../services/shopify'
+import { ShopifyService } from '../../shared/services/shopify'
 
 import { Store } from '@ngrx/store';
-import * as blends from '../actions/blends'
+import * as product from '../actions/product'
 import * as snackbar from '../../core/actions/snackbar'
 import * as fromRoot from '../../reducers';
 
 import {
-    BlendsActionTypes,
-    BlendsActions,
+    ProductActionTypes,
+    ProductActions,
     ListSuccess,
     ListFail,
+    Load,
     LoadSuccess,
     LoadFail,
-} from '../actions/blends'
-import { Load } from '../actions/resource';
+} from '../actions/product'
 
 @Injectable()
 export class BlendsEffects {
 
     @Effect()
     getBlends$: Observable<Action> = this.actions$.pipe(
-        ofType(BlendsActionTypes.List),
+        ofType(ProductActionTypes.List),
         switchMap(() => 
             from(this.shopify.getProducts())
             .pipe(
@@ -40,9 +40,9 @@ export class BlendsEffects {
 
     @Effect()
     getBlend$: Observable<Action> = this.actions$.pipe(
-        ofType(BlendsActionTypes.Load),
+        ofType(ProductActionTypes.Load),
         map((action: Load) => action.payload),
-        switchMap((payload) => 
+        mergeMap((payload) => 
             from(this.shopify.getProductById(payload))
             .pipe(
                 map((response: any) => new LoadSuccess(response)),

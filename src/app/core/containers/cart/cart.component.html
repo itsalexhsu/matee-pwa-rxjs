@@ -1,0 +1,22 @@
+<div class="cart">
+  <div class="header">
+    <mat-toolbar>
+      <span></span>
+      <span>Review Order</span>
+      <span>
+        <button mat-icon-button (click)='closeCart()'>
+          <mat-icon>close</mat-icon>
+        </button>
+      </span>
+    </mat-toolbar>
+  </div>
+
+  <!-- <ng-content (addToCart)='onAddToCart($event)'>
+  </ng-content> -->
+
+  <app-cart-items
+    *ngFor="let lineItem of lineItems"
+    [lineItem]='lineItem'>
+  </app-cart-items>
+
+</div>

@@ -79,7 +79,7 @@ import { environment } from '../environments/environment';
        * See: https://github.com/zalmoxisus/redux-devtools-extension
        */
       StoreDevtoolsModule.instrument({
-        name: 'NgRx My Journal DevTools',
+        name: 'NgRx Matee DevTools',
         logOnly: environment.production,
       }),
 

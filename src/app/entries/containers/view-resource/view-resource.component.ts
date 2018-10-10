@@ -6,10 +6,7 @@ import { Observable, Subscription, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import * as fromEntries from '../../reducers/';
-import * as resource from '../../actions/resource';
 import * as layout from '../../../core/actions/layout';
-
-import { Resource } from "../../models/resource.model";
 
 @Component({
   selector: 'app-view-resource',
@@ -19,11 +16,7 @@ import { Resource } from "../../models/resource.model";
 })
 export class ViewResourceComponent implements OnInit {
 
-  $resource: Observable<Resource>
-  $photo: Observable<any>
-
   ngOnInit() {
-    // this.$resource = this.store.pipe(select(fromEntries.getResource))
   }
 
   constructor(

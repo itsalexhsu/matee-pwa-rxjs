@@ -8,11 +8,9 @@ import { MaterialModule } from '../material';
 
 // Components
 import { BlendCardComponent } from './components/blend-card/blend-card.component';
-import { SelectSizeCardComponent } from './components/select-size-card/select-size-card.component';
 
 const CONTAINER = [
 BlendCardComponent,
-SelectSizeCardComponent,
 ]
 
 @NgModule({
