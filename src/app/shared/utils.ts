@@ -1,4 +1,3 @@
-import * as EXIF from 'exif-js'
 import { FormGroup } from '@angular/forms';
 import { RouterStateSerializer } from '@ngrx/router-store';
 import { RouterStateSnapshot, Params } from '@angular/router';
@@ -45,14 +44,6 @@ export function FindUserAttributeValue(key: string, userAttributes: CognitoUserA
   }
 }
 
-export function GetCoordFromExif(exif: any) {
-  let latitude = exif.GPSLatitude[0] + ( exif.GPSLatitude[1] / 60 ) + exif.GPSLatitude[2] / (60 * 60)
-  let longitude = exif.GPSLongitude[0]  + ( exif.GPSLongitude[1] / 60 ) + exif.GPSLongitude[2] / (60 * 60)
-  if (exif.GPSLongitudeRef === "W") { longitude = longitude * -1 }
-  if (exif.GPSLatitudeRef === "S") { latitude = latitude * -1 }
-  return {latitude, longitude}
-}
-
 export function MatchValidator(group: FormGroup) {
   let password = group.controls.confirmPassword.value
   let toConfirm = group.controls.password.value
@@ -68,58 +59,5 @@ export function Id() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
-  })
-}
-
-export function GetExif(blob) {
-  return new Promise(resolve => {
-    EXIF.getData(blob, function(){
-      resolve(EXIF.getAllTags(blob))
-    })
-  })
-}
-
-export function CreateThumbnail(photo) {
-  return new Promise(resolve => {
-    const img: any = new Image();
-
-    let canvas = document.createElement('canvas')
-    let ctx = canvas.getContext("2d")
-  
-    canvas.height = 300
-    canvas.width = 300
-  
-    img.onload = function() {
-  
-      let size
-      let width = img.width
-      let height = img.height
-      let oc = document.createElement('canvas')
-      let octx = oc.getContext("2d")
-  
-      if (width < height) {
-        size = width
-      } else {
-        size = height
-      }
-  
-      oc.width = size
-      oc.height = size
-  
-      // draw image
-      octx.drawImage(img, 0, 0);
-  
-      // Final
-      ctx.drawImage(oc, 0, 0, oc.width, oc.height,
-        0, 0, canvas.width, canvas.height);
-  
-      // export base64
-      let dataUrl = canvas.toDataURL('image/jpeg', 1)
-      let base64 = dataUrl.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-      resolve(base64)
-    }
-  
-    let dataUrl = 'data:' + photo.content_type + ';base64,' + photo.data
-    img.src = dataUrl
   })
 }

@@ -22,6 +22,8 @@ export class CartComponent {
 
   @Input() lineItems: LineItem[]
 
+  lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
+
   constructor(
     private shopifyService: ShopifyService,
     private globalService: GlobalService,
@@ -31,6 +33,7 @@ export class CartComponent {
   }
 
   ngOnInit() {
+    this.store.dispatch(new cart.LoadCart)
   }
 
   closeCart() {

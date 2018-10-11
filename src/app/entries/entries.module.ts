@@ -31,9 +31,6 @@ import { MaterialModule } from '../material';
 import { reducers } from './reducers';
 import { routes } from './routes';
 
-import { PipesModule } from '../shared/pipes';
-import { OrientationPipe } from "../shared/pipes/resetOrientation";
-import { ToBase64Pipe } from '../shared/pipes/fileToBase64';
 import { SharedModule } from '../shared/shared.module';
 
 const COMPONENTS = [
@@ -57,7 +54,6 @@ const COMPONENTS = [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    PipesModule,
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('entries', reducers),
@@ -71,7 +67,7 @@ export class EntriesModule {
   static forRoot() {
     return {
       ngModule: EntriesModule,
-      providers: [OrientationPipe, ToBase64Pipe]
+      providers: []
     };
   }
 }

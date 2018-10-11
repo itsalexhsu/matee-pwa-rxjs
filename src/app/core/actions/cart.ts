@@ -7,11 +7,11 @@ export enum CartActionTypes {
     LoadCart = '[Cart] Load Item',
     LoadCartSuccess = '[Cart] Load Success',
     LoadCartFail = '[Cart] Load Fail',
-    AddItemToCart = '[Cart] Add Item To Cart',
-    AddItemToCartSuccess = '[Cart] Add Item Success To Cart',
-    AddItemToCartFail = '[Cart] Add Item Fail To Cart',
+    // AddItemToCart = '[Cart] Add Item To Cart',
+    // AddItemToCartSuccess = '[Cart] Add Item Success To Cart',
+    // AddItemToCartFail = '[Cart] Add Item Fail To Cart',
     AddItem = '[Cart] Add Item',
-    AddItemSuccess = '[Cart] Add Item Success',
+    // AddItemSuccess = '[Cart] Add Item Success',
     AddItemFail = '[Cart] Add Item Fail',
     RemoveItem = '[Cart] Remove Item',
     RemoveItemSuccess = '[Cart] Remove Item Success',
@@ -42,7 +42,7 @@ export class LoadCart implements Action {
 export class LoadCartSuccess implements Action {
   readonly type = CartActionTypes.LoadCartSuccess;
 
-  constructor(public payload: any[]) {}
+  constructor(public payload: LineItem[]) {}
 }
 
 export class LoadCartFail implements Action {
@@ -51,26 +51,26 @@ export class LoadCartFail implements Action {
   constructor(public payload: any) {}
 }
 
-/**
- * Add Item Actions
- */
-export class AddItemToCart implements Action {
-  readonly type = CartActionTypes.AddItemToCart;
+// /**
+//  * Add Item Actions
+//  */
+// export class AddItemToCart implements Action {
+//   readonly type = CartActionTypes.AddItemToCart;
 
-  constructor(public payload: LineItem) {}
-}
+//   constructor(public payload: LineItem) {}
+// }
 
-export class AddItemToCartSuccess implements Action {
-  readonly type = CartActionTypes.AddItemToCartSuccess;
+// export class AddItemToCartSuccess implements Action {
+//   readonly type = CartActionTypes.AddItemToCartSuccess;
 
-  constructor(public payload: LineItem[]) {}
-}
+//   constructor(public payload: LineItem[]) {}
+// }
 
-export class AddItemToCartFail implements Action {
-  readonly type = CartActionTypes.AddItemToCartFail;
+// export class AddItemToCartFail implements Action {
+//   readonly type = CartActionTypes.AddItemToCartFail;
 
-  constructor(public payload: any) {}
-}
+//   constructor(public payload: any) {}
+// }
 
 /**
  * Add Item Actions
@@ -81,11 +81,11 @@ export class AddItem implements Action {
   constructor(public payload: LineItem) {}
 }
 
-export class AddItemSuccess implements Action {
-  readonly type = CartActionTypes.AddItemSuccess;
+// export class AddItemSuccess implements Action {
+//   readonly type = CartActionTypes.AddItemSuccess;
 
-  constructor(public payload: LineItem) {}
-}
+//   constructor(public payload: LineItem) {}
+// }
 
 export class AddItemFail implements Action {
   readonly type = CartActionTypes.AddItemFail;
@@ -114,13 +114,11 @@ export class RemoveItemSuccess implements Action {
 export class UpdateCart implements Action {
   readonly type = CartActionTypes.UpdateCart;
 
-  constructor(public payload: LineItem[]) {}
+  constructor(public payload: LineItem) {}
 }
 
 export class UpdateCartSuccess implements Action {
   readonly type = CartActionTypes.UpdateCartSuccess;
-
-  constructor(public payload: LineItem[]) {}
 }
 
 export class UpdateCartFail implements Action {
@@ -135,11 +133,11 @@ export type CartActions =
   | LoadCart
   | LoadCartSuccess
   | LoadCartFail
-  | AddItemToCart
-  | AddItemToCartSuccess
-  | AddItemToCartFail
+  // | AddItemToCart
+  // | AddItemToCartSuccess
+  // | AddItemToCartFail
   | AddItem
-  | AddItemSuccess
+  // | AddItemSuccess
   | AddItemFail
   | RemoveItem
   | RemoveItemSuccess

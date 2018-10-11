@@ -11,6 +11,7 @@ import * as fromAuth from '../../../auth/reducers';
 import * as fromRoot from '../../../reducers';
 import * as layout from '../../actions/layout';
 import * as cart from '../../actions/cart';
+import * as checkout from '../../actions/checkout';
 
 import { GlobalService, LineItem, Product, Variant } from '../../../shared'
 
@@ -45,26 +46,24 @@ export class AppComponent {
     this.store.dispatch(new layout.showCartButton)
     this.store.dispatch(new layout.hideAddItemButton)
 
-    // From AddItem
-    this.newLineItem$
-    .pipe(map(payload => payload))
-    .subscribe((lineItem: LineItem) => {
-      if (lineItem) {
-        this.lineItems.push(lineItem)
-      }
-    })
+    // this.newLineItem$
+    // .pipe(map(payload => payload))
+    // .subscribe((lineItem: LineItem) => {
+    //   if (lineItem) {
+    //     this.lineItems.push(lineItem)
+    //   }
+    // })
 
-    // From AddItemToCart & RemoveItem
-    this.removedLineItem$
-    .pipe(map(payload => payload))
-    .subscribe((lineItem: LineItem) => {
-      if (lineItem) {
-        let index = this.lineItems.indexOf(lineItem)
-        if (index!=-1) {
-          this.lineItems.splice(index, 1)
-        }
-      }
-    })
+    // this.removedLineItem$
+    // .pipe(map(payload => payload))
+    // .subscribe((lineItem: LineItem) => {
+    //   if (lineItem) {
+    //     let index = this.lineItems.indexOf(lineItem)
+    //     if (index!=-1) {
+    //       this.lineItems.splice(index, 1)
+    //     }
+    //   }
+    // })
   }
 
   constructor(
@@ -73,7 +72,7 @@ export class AppComponent {
   ) { }
 
   checkOut(event) {
-    console.log(event)
+    this.store.dispatch(new checkout.CreateUpdate)
   }
 
   addVariantToCart(event) {
@@ -82,7 +81,7 @@ export class AppComponent {
       .pipe(map(payload => payload))
       .subscribe((variant: Variant) => {
         let lineItem = new LineItem(variant, 1)
-        this.lineItems.push(lineItem)
+        this.store.dispatch(new cart.AddItem(lineItem))
       })
     }
   }

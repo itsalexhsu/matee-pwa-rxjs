@@ -100,6 +100,11 @@ export const getShowCart = createSelector(
   fromCart.getShowCart
 );
 
+export const getLineItems = createSelector(
+  getCartState,
+  fromCart.getLineItems
+);
+
 
 /**
  * Layout Reducers

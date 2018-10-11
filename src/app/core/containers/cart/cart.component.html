@@ -15,7 +15,7 @@
   </ng-content> -->
 
   <app-cart-items
-    *ngFor="let lineItem of lineItems"
+    *ngFor="let lineItem of lineItems$ | async"
     [lineItem]='lineItem'>
   </app-cart-items>
 

@@ -1,40 +1,16 @@
 import { Action } from '@ngrx/store';
 
 export enum CheckoutActionTypes {
-  Load = '[Checkout] Load',
-  LoadSuccess = '[Checkout] Load Success',
-  LoadFail = '[Checkout] Load Fail',
-  Create = '[Checkout] Create',
+  CreateUpdate = '[Checkout] Create or Update',
   CreateSuccess = '[Checkout] Create Success',
   CreateFail = '[Checkout] Create Fail',
 }
 
 /**
- * Load Checkout Actions
- */
-export class Load implements Action {
-  readonly type = CheckoutActionTypes.Load;
-}
-
-export class LoadSuccess implements Action {
-  readonly type = CheckoutActionTypes.LoadSuccess;
-
-  constructor(public payload: any[]) {}
-}
-
-export class LoadFail implements Action {
-  readonly type = CheckoutActionTypes.LoadFail;
-
-  constructor(public payload: any) {}
-}
-
-/**
  * Create Checkout Actions
  */
-export class Create implements Action {
-  readonly type = CheckoutActionTypes.Create;
-
-  constructor(public payload: string) {}
+export class CreateUpdate implements Action {
+  readonly type = CheckoutActionTypes.CreateUpdate;
 }
 
 export class CreateSuccess implements Action {
@@ -50,9 +26,6 @@ export class CreateFail implements Action {
 }
 
 export type CheckoutActions =
-  | Load
-  | LoadSuccess
-  | LoadFail
-  | Create
+  | CreateUpdate
   | CreateSuccess
   | CreateFail

@@ -24,7 +24,7 @@ export class FeaturedBlendsComponent {
   onAddToCartClick(event) {
     if (event) {
       let lineItem = new LineItem(this.blendDetail.variants[0], 1)
-      this.store.dispatch(new cart.AddItemToCart(lineItem))
+      this.store.dispatch(new cart.AddItem(lineItem))
     }
   }
 

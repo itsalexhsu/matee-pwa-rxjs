@@ -3,11 +3,15 @@ import { ShopifyService } from './shopify';
 import { GlobalService } from './global.service';
 import { LineItem } from '../models/lineItem.model';
 
+import * as cart from '../../core/actions/cart'
 import * as fromRoot from '../../reducers';
 
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+
+import * as localStorage from 'localforage'
+const cacheAvailable = 'caches' in self;
 
 @Injectable({
     providedIn: 'root'
@@ -15,20 +19,19 @@ import { map, tap } from 'rxjs/operators';
 
 export class CartService {
 
-    
-
     lineItems: LineItem[];
     cartId: string;
+
+    // lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
   
     constructor(
       private store: Store<fromRoot.State>,
       private shopifyService: ShopifyService,
       private globalService: GlobalService,
-    ) {
-  
-    }
+    ) { }
   
     ngOnInit() {
+        // this.store.dispatch(new cart.LoadCart)
       // this.globalService.lineItemsObs.subscribe(lineItems => {
       //   if (this.cartId) {
       //     this.updateItemQuantity().then(
@@ -39,7 +42,40 @@ export class CartService {
       //   }
       // }
       // )
+    }
 
+    loadCart() {
+      return new Promise(resolve => {
+        from(localStorage.getItem('lineItems')).pipe(
+          map((lineItems: LineItem[]) => {
+            resolve(JSON.parse(lineItems))
+          })
+        )
+        .subscribe()
+      })
+    }
+
+    updateStorage(lineItem: LineItem) {
+      return new Promise(resolve => {
+        from(localStorage.getItem('lineItems')).pipe(
+          map((lineItems: string) => {
+            if (lineItems) {
+              let newLineItems = JSON.parse(lineItems)
+              newLineItems.push(lineItem)
+              localStorage.setItem('lineItems', JSON.stringify(newLineItems), (err) => {
+                resolve(err)
+              })
+            } else {
+              let lineItems: LineItem[] = []
+              lineItems.push(lineItem)
+              localStorage.setItem('lineItems', JSON.stringify(lineItems), (err) => {
+                resolve(err)
+              })
+            }
+          })
+        )
+        .subscribe()
+      })
     }
   
     createUpdateCheckout() {
@@ -96,26 +132,6 @@ export class CartService {
         }
       })
     }
-
-    // removeItem(lineItem: LineItem) {
-    //   return new Promise(res => {
-    //     if (this.cartId) {
-    //       this.shopifyService.removeLineItem(this.cartId, lineItem.id).then(
-    //         ({ model, data }) => {
-    //           if (!data.checkoutLineItemsRemove.userErrors.length) {
-    //             res(this.globalService.removeItem(lineItem))
-    //           } else {
-    //             data.checkoutLineItemsRemove.userErrors.forEach(error => {
-    //               alert(JSON.stringify(error));
-    //             });
-    //           }
-    //         }, err => alert(err)
-    //       )
-    //     } else {
-    //       res(this.globalService.removeItem(lineItem))
-    //     }
-    //   })
-    // }
   
     increaseQuantity(lineItem: LineItem) {
       lineItem.quantity++;

@@ -21,13 +21,19 @@ export function reducer(
 ): State {
   switch (action.type) {
 
-    case CartActionTypes.AddItemSuccess:
-        return {
-        ...state,
-        newLineItem: action.payload,
-    };
+    // case CartActionTypes.AddItemSuccess:
+    //     return {
+    //     ...state,
+    //     newLineItem: action.payload,
+    // };
 
-    case CartActionTypes.AddItemToCartSuccess:
+    // case CartActionTypes.AddItemToCartSuccess:
+    //     return {
+    //     ...state,
+    //     lineItems: action.payload,
+    // };
+
+    case CartActionTypes.LoadCartSuccess:
         return {
         ...state,
         lineItems: action.payload,
@@ -59,3 +65,4 @@ export function reducer(
 export const getNewLineItem = (state: State) => state.newLineItem;
 export const getRemovedItem = (state: State) => state.removedLineItem;
 export const getShowCart = (state: State) => state.showCart;
+export const getLineItems = (state: State) => state.lineItems;

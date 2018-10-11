@@ -44,11 +44,11 @@ export class GlobalService {
         this.cartOpenCloseObs.next(value);
     }
 
-    addItemToCart(lineItem: LineItem) {
-        return new Promise(res => {
-            this.store.dispatch(new cart.AddItem(lineItem))
-        })
-    }
+    // addItemToCart(lineItem: LineItem) {
+    //     return new Promise(res => {
+    //         this.store.dispatch(new cart.AddItem(lineItem))
+    //     })
+    // }
 
     // removeItem(lineItem) {
     //     return new Promise(res => {
