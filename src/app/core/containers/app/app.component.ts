@@ -12,7 +12,7 @@ import * as fromRoot from '../../../reducers';
 import * as layout from '../../actions/layout';
 import * as cart from '../../actions/cart';
 
-import { GlobalService, LineItem, Product } from '../../../shared'
+import { GlobalService, LineItem, Product, Variant } from '../../../shared'
 
 @Component({
   selector: 'app-root',
@@ -36,6 +36,7 @@ export class AppComponent {
 
   newLineItem$: Observable<LineItem> = this.store.pipe(select(fromRoot.getNewLineItem))
   removedLineItem$: Observable<LineItem> = this.store.pipe(select(fromRoot.getRemovedItem))
+  selectedVariant$: Observable<Variant> = this.store.pipe(select(fromEntries.getSelectedVariant))
 
   showCart$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCart))
 
@@ -75,12 +76,13 @@ export class AppComponent {
     console.log(event)
   }
 
-  addToCart(event) {
+  addVariantToCart(event) {
     if (event) {
-      this.blend$
+      this.selectedVariant$
       .pipe(map(payload => payload))
-      .subscribe((product: Product) => {
-        console.log(product)
+      .subscribe((variant: Variant) => {
+        let lineItem = new LineItem(variant, 1)
+        this.lineItems.push(lineItem)
       })
     }
   }

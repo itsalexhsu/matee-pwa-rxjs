@@ -44,3 +44,8 @@ export const getBlendResult = createSelector(
   blendPageState,
   fromProductDetail.getProductResult
 );
+
+export const getSelectedVariant = createSelector(
+  blendPageState,
+  fromProductDetail.getSelectedVariant
+);

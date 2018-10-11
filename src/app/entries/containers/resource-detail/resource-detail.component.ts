@@ -8,9 +8,10 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import * as layout from '../../../core/actions/layout';
-import * as fromEntries from '../../reducers/';
 import * as product from '../../actions/product';
-import { Product } from 'src/app/shared';
+import * as fromEntries from '../../reducers/';
+
+import { Product, LineItem } from 'src/app/shared';
 
 @Component({
   selector: 'app-resource-detail',
@@ -31,8 +32,10 @@ export class ResourceDetailComponent {
       .subscribe(store)
     }
 
-    onSizeSelect(event) {
-      console.log(event)
+    onSizeSelect(variant) {
+      if (variant) {
+        this.store.dispatch(new product.SelectVariant(variant))
+      }
     }
 
 }

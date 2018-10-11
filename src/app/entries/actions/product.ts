@@ -62,6 +62,7 @@ export class SelectVariant implements Action {
 
 
 export type ProductActions =
+  | SelectVariant
   | Load
   | LoadSuccess
   | LoadFail

@@ -21,6 +21,11 @@
 </mat-card>
 <mat-divider></mat-divider>
 
+<app-select-size-card
+  [blend]='blend$ | async'
+  (selected)='onSizeSelect($event)'>
+</app-select-size-card>
+
 <mat-card class="mat-elevation-z0">
   <mat-card-subtitle>Base Ingredient</mat-card-subtitle>
   <p><strong>Organic Pure-leaf Yerba Mate</strong></p>
@@ -51,8 +56,3 @@
     </mat-card-actions>
   </mat-card>
   <mat-divider></mat-divider>
-
-  <app-select-size-card
-    [blend]='blend$ | async'
-    (selected)='onSizeSelect($event)'>
-  </app-select-size-card>

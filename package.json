@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 192.168.0.11 --ssl --live-reload false",
+    "start": "ng serve --host 192.168.0.14 --ssl --live-reload false",
     "start:prod": "ng build --prod && lite-server --baseDir dist/mylog-angular-pwa",
     "build": "ng build",
     "test": "ng test",

@@ -11,13 +11,15 @@ export class SelectSizeCardComponent {
 
   @Output() selected = new EventEmitter()
 
-  constructor() { }
+  constructor() {
+  }
 
   onChipClick(event) {
     this.selected.emit(event)
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    this.selected.emit(this.blend.variants[0])
   }
 
 }
