@@ -4,15 +4,14 @@
       <span></span>
       <span>Review Order</span>
       <span>
-        <button mat-icon-button (click)='closeCart()'>
+        <button
+          mat-icon-button
+          [routerLink]="['/products']">
           <mat-icon>close</mat-icon>
         </button>
       </span>
     </mat-toolbar>
   </div>
-
-  <!-- <ng-content (addToCart)='onAddToCart($event)'>
-  </ng-content> -->
 
   <app-cart-items
     *ngFor="let lineItem of lineItems$ | async"

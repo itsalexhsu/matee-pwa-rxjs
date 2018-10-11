@@ -9,25 +9,23 @@ import * as product from '../../actions/product';
 import * as layout from '../../../core/actions/layout';
 
 @Component({
-  selector: 'app-blends',
+  selector: 'app-products',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './blends.component.html',
-  styleUrls: ['./blends.component.scss']
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.scss']
 })
-export class BlendsComponent implements OnInit {
+export class ProductsComponent implements OnInit {
 
-  blends$: Observable<any[]> = this.store.pipe(select(fromEntries.getBlendsResult))
+  products$: Observable<any[]> = this.store.pipe(select(fromEntries.getBlendsResult))
 
   constructor(
     private store: Store<fromEntries.State>,
-  ) {
-    this.store.dispatch(new layout.ShowFooter())
-    this.store.dispatch(new layout.showCartButton())
-    this.store.dispatch(new layout.hideAddItemButton())
-    this.store.dispatch(new product.List())
-  }
+  ) { }
 
   ngOnInit() {
+    this.store.dispatch(new product.List())
+    this.store.dispatch(new layout.HideFooter())
+    this.store.dispatch(new layout.ShowCartButton())
   }
 
 }

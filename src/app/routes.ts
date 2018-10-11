@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
-import { ResourcesComponent } from './entries/containers/resources/resources.component';
+import { NewsComponent } from './entries/containers/news/news.component';
+import { CartComponent } from './core/containers/cart/cart.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/entries', pathMatch: 'full' },
+  { path: 'cart', component: CartComponent },
   {
     path: 'entries',
     loadChildren: './entries/entries.module#EntriesModule',
   },
-  { path: '**', component: ResourcesComponent },
+  { path: '**', component: NewsComponent },
 ];

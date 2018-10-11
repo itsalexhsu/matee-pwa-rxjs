@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ShopifyService } from './shopify';
-import { GlobalService } from './global.service';
-import { LineItem } from '../models/lineItem.model';
 
 import * as cart from '../../core/actions/cart'
 import * as fromRoot from '../../reducers';
 
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription, from } from 'rxjs';
+import { Observable, Subscription, from, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import * as localStorage from 'localforage'
-const cacheAvailable = 'caches' in self;
+import { ShopifyService } from './shopify';
+
+import { LineItem } from '../models/lineItem.model';
+
+import * as localForage from "localforage";
 
 @Injectable({
     providedIn: 'root'
@@ -19,169 +19,110 @@ const cacheAvailable = 'caches' in self;
 
 export class CartService {
 
-    lineItems: LineItem[];
-    cartId: string;
+  lineItems: LineItem[] = []
+  cartId: string;
 
-    // lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
-  
-    constructor(
-      private store: Store<fromRoot.State>,
-      private shopifyService: ShopifyService,
-      private globalService: GlobalService,
-    ) { }
-  
-    ngOnInit() {
-        // this.store.dispatch(new cart.LoadCart)
-      // this.globalService.lineItemsObs.subscribe(lineItems => {
-      //   if (this.cartId) {
-      //     this.updateItemQuantity().then(
-      //       quantityUpdated => { if (quantityUpdated) { this.lineItems = lineItems } }, err => alert(err)
-      //     )
-      //   } else {
-      //     this.lineItems = lineItems;
-      //   }
-      // }
-      // )
-    }
+  constructor(
+    private store: Store<fromRoot.State>,
+    private shopifyService: ShopifyService,
+  ) { }
 
-    loadCart() {
-      return new Promise(resolve => {
-        from(localStorage.getItem('lineItems')).pipe(
-          map((lineItems: LineItem[]) => {
-            resolve(JSON.parse(lineItems))
-          })
-        )
-        .subscribe()
-      })
-    }
+  storeItems(lineItems) {
+    return localForage.setItem('lineItems', JSON.stringify(lineItems))
+  }
 
-    updateStorage(lineItem: LineItem) {
-      return new Promise(resolve => {
-        from(localStorage.getItem('lineItems')).pipe(
-          map((lineItems: string) => {
-            if (lineItems) {
-              let newLineItems = JSON.parse(lineItems)
-              newLineItems.push(lineItem)
-              localStorage.setItem('lineItems', JSON.stringify(newLineItems), (err) => {
-                resolve(err)
-              })
-            } else {
-              let lineItems: LineItem[] = []
-              lineItems.push(lineItem)
-              localStorage.setItem('lineItems', JSON.stringify(lineItems), (err) => {
-                resolve(err)
-              })
-            }
-          })
-        )
-        .subscribe()
-      })
-    }
-  
-    createUpdateCheckout() {
-      if (!this.cartId) {
-        this.shopifyService.createCheckout(this.lineItems).then(
+  addItem(lineItem: LineItem) {
+    return new Promise(resolve => {
+      if (this.cartId) {
+        this.shopifyService.addVariantsToCheckout(this.cartId, [lineItem]).then(
           ({ model, data }) => {
-            if (!data.checkoutCreate.userErrors.length) {
-              this.cartId = data.checkoutCreate.checkout.id;
-              this.openCheckout(data.checkoutCreate.checkout);
+            if (!data.checkoutLineItemsAdd.userErrors.length) {
+              this.lineItems.push(lineItem);
               let i = 0;
-              data.checkoutCreate.checkout.lineItems.edges.forEach(edge => {
-                this.lineItems[i].id = edge.node.id;
+              data.checkoutLineItemsAdd.checkout.lineItems.edges.forEach(edge => {
+                if (edge.node.variant.id = lineItem.variantId) {
+                  this.lineItems[i].id = edge.node.id;
+                }
                 i++;
               });
             } else {
-              data.checkoutCreate.userErrors.forEach(error => {
+              data.checkoutLineItemsAdd.userErrors.forEach(error => {
                 alert(JSON.stringify(error));
               });
             }
           }, err => alert(err)
-        );
+        )
       } else {
-        this.shopifyService.fetchCheckout(this.cartId).then(
-          ({ model, data }) => {
-            this.openCheckout(data.checkout);
-          }, err => alert(err)
-        )
+        this.lineItems.push(lineItem)
+        resolve(this.storeItems(this.lineItems))
       }
-    }
+    })
+  }
 
-    addItem(lineItem: LineItem) {
-      return new Promise(res => {
-        if (this.cartId) {
-          this.shopifyService.addVariantsToCheckout(this.cartId, [lineItem]).then(
-            ({ model, data }) => {
-              if (!data.checkoutLineItemsAdd.userErrors.length) {
-                res(lineItem);
-                let i = 0;
-                data.checkoutLineItemsAdd.checkout.lineItems.edges.forEach(edge => {
-                  if (edge.node.variant.id = lineItem.variantId) {
-                    this.lineItems[i].id = edge.node.id;
-                  }
-                  i++;
-                });
-              } else {
-                data.checkoutLineItemsAdd.userErrors.forEach(error => {
-                  alert(JSON.stringify(error));
-                });
-              }
-            }, err => alert(err)
-          )
-        } else {
-          res(lineItem)
-        }
-      })
-    }
-  
-    increaseQuantity(lineItem: LineItem) {
-      lineItem.quantity++;
-      if (this.cartId) {
-        this.updateItemQuantity().then(
-          quantityUpdated => {
-            if (!quantityUpdated) {
-              lineItem.quantity--;
-            }
-          }, err => alert(err)
-        )
-      }
-    }
-  
-    decreaseQuantity(lineItem: LineItem) {
-      if (lineItem.quantity > 1)
-        lineItem.quantity--;
-      if (this.cartId) {
-        this.updateItemQuantity().then(
-          quantityUpdated => {
-            if (!quantityUpdated) {
-              lineItem.quantity++;
-            }
-          }, err => alert(err)
-        )
-      }
-    }
-  
-    updateItemQuantity(): Promise<boolean> {
-      return this.shopifyService.updateLineItem(this.cartId, this.lineItems).then(
+  removeItem(lineItem: LineItem) {
+    if (this.cartId) {
+      this.shopifyService.removeLineItem(this.cartId, lineItem.id).then(
         ({ model, data }) => {
-          if (!data.checkoutLineItemsUpdate.userErrors.length) {
-            return true;
+          if (!data.checkoutLineItemsRemove.userErrors.length) {
+            this.removeItemFromArray(lineItem);
           } else {
-            data.checkoutLineItemsUpdate.userErrors.forEach(error => {
+            data.checkoutLineItemsRemove.userErrors.forEach(error => {
               alert(JSON.stringify(error));
             });
-            return false;
           }
-        }, err => false
+        }, err => alert(err)
+      )
+    } else {
+      this.removeItemFromArray(lineItem);
+    }
+  }
+
+  removeItemFromArray(lineItem) {
+
+      let lineItems = this.lineItems
+      let index = lineItems.indexOf(lineItem);
+
+      if (index!=-1) {
+          lineItems.splice(index, 1)
+          this.lineItems = lineItems
+      }
+  }
+
+  createUpdateCheckout() {
+    if (!this.cartId) {
+      this.shopifyService.createCheckout(this.lineItems).then(
+        ({ model, data }) => {
+          if (!data.checkoutCreate.userErrors.length) {
+            this.cartId = data.checkoutCreate.checkout.id;
+            this.openCheckout(data.checkoutCreate.checkout);
+            let i = 0;
+            data.checkoutCreate.checkout.lineItems.edges.forEach(edge => {
+              this.lineItems[i].id = edge.node.id;
+              i++;
+            });
+          } else {
+            data.checkoutCreate.userErrors.forEach(error => {
+              alert(JSON.stringify(error));
+            });
+          }
+        }, err => alert(err)
+      );
+    } else {
+      this.shopifyService.fetchCheckout(this.cartId).then(
+        ({ model, data }) => {
+          this.openCheckout(data.checkout);
+        }, err => alert(err)
       )
     }
-  
-    get total(): number {
-      if (this.lineItems.length) return this.lineItems.map(lineItem => lineItem.quantity * (+lineItem.variant.price)).reduce((prev, next) => prev + next);
-      else return 0;
-    }
-  
-    openCheckout(checkout) {
-      window.open(checkout.webUrl);
-    }
+  }
+
+  get total(): number {
+    if (this.lineItems.length) return this.lineItems.map(lineItem => lineItem.quantity * (+lineItem.variant.price)).reduce((prev, next) => prev + next);
+    else return 0;
+  }
+
+  openCheckout(checkout) {
+    window.open(checkout.webUrl);
+  }
 
 }

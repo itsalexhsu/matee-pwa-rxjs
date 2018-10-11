@@ -10,12 +10,11 @@ import * as fromEntries from '../../reducers/';
 import * as layout from '../../../core/actions/layout';
 
 @Component({
-  selector: 'app-resources',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.scss']
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.scss']
 })
-export class ResourcesComponent implements OnInit {
+export class NewsComponent implements OnInit {
 
   ngOnInit() {
 
@@ -25,7 +24,7 @@ export class ResourcesComponent implements OnInit {
     private store: Store<fromEntries.State>,
   ) {
     this.store.dispatch(new layout.ShowFooter())
-    this.store.dispatch(new layout.showCartButton())
+    this.store.dispatch(new layout.ShowCartButton())
   }
 
 }

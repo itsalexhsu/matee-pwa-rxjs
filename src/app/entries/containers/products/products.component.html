@@ -15,11 +15,11 @@
 <mat-tab-group mat-stretch-tabs>
   
   <mat-tab label="Featured">
-      <app-featured-blends
-        *ngFor="let blend of blends$ | async"
-        [blend]='blend'>
+      <app-featured-products
+        *ngFor="let product of products$ | async"
+        [product]='product'>
         <!-- Featured Blends -->
-      </app-featured-blends>
+      </app-featured-products>
   </mat-tab>
   <mat-tab label="Create">
       <app-create-blends>

@@ -9,19 +9,23 @@ import * as fromEntries from '../../reducers/';
 import * as layout from '../../../core/actions/layout';
 
 @Component({
-  selector: 'app-view-resource',
+  selector: 'app-product',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './view-resource.component.html',
-  styleUrls: ['./view-resource.component.scss']
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
-export class ViewResourceComponent implements OnInit {
+export class ProductComponent implements OnInit {
 
   ngOnInit() {
+      this.store.dispatch(new layout.HideFooter())
+      this.store.dispatch(new layout.ShowAddItemButton())
+  }
+
+  ngOnDestroy() {
+      this.store.dispatch(new layout.HideAddItemButton())
   }
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private store: Store<fromEntries.State>) {
-      store.dispatch(new layout.HideFooter())
-    }
+    private store: Store<fromEntries.State>) { }
 }

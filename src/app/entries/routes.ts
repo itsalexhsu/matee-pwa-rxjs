@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { BlendsComponent } from './containers/blends/blends.component';
+import { ProductsComponent } from './containers/products/products.component';
+import { ProductComponent } from './containers/product/product.component';
 import { IngredientListComponent } from './containers/ingredient-list/ingredient-list.component';
-import { ResourcesComponent } from './containers/resources/resources.component';
-import { ViewResourceComponent } from './containers/view-resource/view-resource.component';
+import { NewsComponent } from './containers/news/news.component';
 
 export const routes: Routes = [
-    { path: '', component: ResourcesComponent },
+    { path: '', component: NewsComponent },
     { path: 'ingredient-list', component: IngredientListComponent },
-    { path: 'products', component: BlendsComponent },
-    { path: 'product/:id', component: ViewResourceComponent },
+    { path: 'products', component: ProductsComponent },
+    { path: 'product/:id', component: ProductComponent },
   ];

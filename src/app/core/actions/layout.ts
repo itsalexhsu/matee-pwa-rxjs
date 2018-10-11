@@ -1,44 +1,44 @@
 import { Action } from '@ngrx/store';
 
 export enum LayoutActionTypes {
-  showAddItemButton = '[layout] Show Add Item Button',
-  hideAddItemButton = '[layout] Hide Add Item Button',
-  showCartButton = '[layout] Show Cart Button',
-  hideCartButton = '[layout] Hide Cart Button',
-  showCheckoutButton = '[layout] Show Checkout Button',
-  hideCheckoutButton = '[layout] Hide Checkout Button',
+  ShowAddItemButton = '[layout] Show Add Item Button',
+  HideAddItemButton = '[layout] Hide Add Item Button',
+  ShowCartButton = '[layout] Show Cart Button',
+  HideCartButton = '[layout] Hide Cart Button',
+  ShowCheckoutButton = '[layout] Show Checkout Button',
+  HideCheckoutButton = '[layout] Hide Checkout Button',
   ShowFooter = '[Layout] Show Footer',
   HideFooter = '[Layout] Hide Footer',
 }
 
 /* Add Item Button Actions */
 
-export class showAddItemButton implements Action {
-  readonly type = LayoutActionTypes.showAddItemButton;
+export class ShowAddItemButton implements Action {
+  readonly type = LayoutActionTypes.ShowAddItemButton;
 }
 
-export class hideAddItemButton implements Action {
-  readonly type = LayoutActionTypes.hideAddItemButton;
+export class HideAddItemButton implements Action {
+  readonly type = LayoutActionTypes.HideAddItemButton;
 }
 
 /* Cart Button Actions */
 
-export class showCartButton implements Action {
-  readonly type = LayoutActionTypes.showCartButton;
+export class ShowCartButton implements Action {
+  readonly type = LayoutActionTypes.ShowCartButton;
 }
 
-export class hideCartButton implements Action {
-  readonly type = LayoutActionTypes.hideCartButton;
+export class HideCartButton implements Action {
+  readonly type = LayoutActionTypes.HideCartButton;
 }
 
 /* Checkout Button Actions */
 
-export class showCheckoutButton implements Action {
-  readonly type = LayoutActionTypes.showCheckoutButton;
+export class ShowCheckoutButton implements Action {
+  readonly type = LayoutActionTypes.ShowCheckoutButton;
 }
 
-export class hideCheckoutButton implements Action {
-  readonly type = LayoutActionTypes.hideCheckoutButton;
+export class HideCheckoutButton implements Action {
+  readonly type = LayoutActionTypes.HideCheckoutButton;
 }
 
 /* Footer Actions */
@@ -52,11 +52,11 @@ export class HideFooter implements Action {
 }
 
 export type LayoutActions =
-  | showAddItemButton
-  | hideAddItemButton
-  | showCartButton
-  | hideCartButton
-  | showCheckoutButton
-  | hideCheckoutButton
+  | ShowAddItemButton
+  | HideAddItemButton
+  | ShowCartButton
+  | HideCartButton
+  | ShowCheckoutButton
+  | HideCheckoutButton
   | ShowFooter
   | HideFooter;

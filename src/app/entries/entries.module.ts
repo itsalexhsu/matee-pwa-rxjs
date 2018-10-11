@@ -9,12 +9,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { BlendsEffects } from "./effects/blends";
 
 //Containers
-import { ResourcesComponent } from './containers/resources/resources.component';
-import { ViewResourceComponent } from './containers/view-resource/view-resource.component';
-import { ResourceDetailComponent } from './containers/resource-detail/resource-detail.component';
-import { BlendsComponent } from './containers/blends/blends.component';
 import { IngredientListComponent } from './containers/ingredient-list/ingredient-list.component';
-import { FeaturedBlendsComponent } from './containers/featured-blends/featured-blends.component';
+import { ProductsComponent } from './containers/products/products.component';
+import { ProductComponent } from './containers/product/product.component';
+import { ProductDetailsComponent } from './containers/product-details/product-details.component';
+import { FeaturedProductsComponent } from './containers/featured-products/featured-products.component';
+import { NewsComponent } from './containers/news/news.component';
 
 //Components
 import { PreviousBlendsComponent } from './components/previous-blends/previous-blends.component';
@@ -35,18 +35,18 @@ import { SharedModule } from '../shared/shared.module';
 
 const COMPONENTS = [
   ArchiveConfirmationComponent,
-  ResourcesComponent,
-  ViewResourceComponent,
-  ResourceDetailComponent,
-  BlendsComponent,
   IngredientListComponent,
-  FeaturedBlendsComponent,
   PreviousBlendsComponent,
   CreateBlendsComponent,
   FavoriteBlendsComponent,
   BlendSummaryComponent,
   SelectSizeCardComponent,
   BlendDetailComponent,
+  ProductsComponent,
+  ProductComponent,
+  ProductDetailsComponent,
+  FeaturedProductsComponent,
+  NewsComponent,
 ]
 
 @NgModule({

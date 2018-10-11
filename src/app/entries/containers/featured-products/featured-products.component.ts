@@ -8,22 +8,22 @@ import * as cart from '../../../core/actions/cart';
 import * as fromEntries from '../../reducers/';
 import * as product from '../../actions/product';
 
-import { Product, Variant, ShopifyService, LineItem, GlobalService } from '../../../shared';
+import { Product, Variant, ShopifyService, LineItem } from '../../../shared';
 import { switchMap, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-featured-blends',
-  templateUrl: './featured-blends.component.html',
-  styleUrls: ['./featured-blends.component.scss']
+  selector: 'app-featured-products',
+  templateUrl: './featured-products.component.html',
+  styleUrls: ['./featured-products.component.scss']
 })
-export class FeaturedBlendsComponent {
+export class FeaturedProductsComponent {
 
-  @Input() blend: Product
-  blendDetail
+  @Input() product: Product
+  productDetails
 
   onAddToCartClick(event) {
     if (event) {
-      let lineItem = new LineItem(this.blendDetail.variants[0], 1)
+      let lineItem = new LineItem(this.productDetails.variants[0], 1)
       this.store.dispatch(new cart.AddItem(lineItem))
     }
   }
@@ -35,7 +35,6 @@ export class FeaturedBlendsComponent {
   }
 
   constructor(
-    private globalService: GlobalService,
     private shopifyService: ShopifyService,
     private store: Store<fromEntries.State>,
   ) {
@@ -43,10 +42,9 @@ export class FeaturedBlendsComponent {
   }
 
   ngOnInit() {
-    // this.store.dispatch(new product.Load(this.blend.id))
-    this.shopifyService.getProductById(this.blend.id)
+    this.shopifyService.getProductById(this.product.id)
     .then(product => {
-      this.blendDetail = product
+      this.productDetails = product
     })
   }
 

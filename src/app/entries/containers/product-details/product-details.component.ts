@@ -14,19 +14,18 @@ import * as fromEntries from '../../reducers/';
 import { Product, LineItem } from 'src/app/shared';
 
 @Component({
-  selector: 'app-resource-detail',
-  templateUrl: './resource-detail.component.html',
-  styleUrls: ['./resource-detail.component.scss'],
+  selector: 'app-product-details',
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ResourceDetailComponent {
+export class ProductDetailsComponent {
 
   blend$: Observable<Product> = this.store.pipe(select(fromEntries.getBlendResult))
 
   constructor(
     private activeRoute: ActivatedRoute,
     private store: Store<fromEntries.State>) {
-      this.store.dispatch(new layout.showAddItemButton())
       this.activeRoute.params
       .pipe(map(params => new product.Load(params.id)))
       .subscribe(store)

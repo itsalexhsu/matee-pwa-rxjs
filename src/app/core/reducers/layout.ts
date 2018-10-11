@@ -20,13 +20,13 @@ export function reducer(
 ): State {
   switch (action.type) {
 
-    case LayoutActionTypes.showCartButton:
+    case LayoutActionTypes.ShowCartButton:
         return {
         ...state,
         showCartButton: true,
     };
 
-    case LayoutActionTypes.hideCartButton:
+    case LayoutActionTypes.HideCartButton:
         return {
         ...state,
         showCartButton: false,
@@ -34,13 +34,13 @@ export function reducer(
 
 
 
-    case LayoutActionTypes.showAddItemButton:
+    case LayoutActionTypes.ShowAddItemButton:
         return {
         ...state,
         showAddItemButton: true,
     };
 
-    case LayoutActionTypes.hideAddItemButton:
+    case LayoutActionTypes.HideAddItemButton:
         return {
         ...state,
         showAddItemButton: false,
@@ -48,13 +48,13 @@ export function reducer(
 
 
 
-    case LayoutActionTypes.showCheckoutButton:
+    case LayoutActionTypes.ShowCheckoutButton:
         return {
         ...state,
         showCheckoutButton: true,
     };
 
-    case LayoutActionTypes.hideCheckoutButton:
+    case LayoutActionTypes.HideCheckoutButton:
         return {
         ...state,
         showCheckoutButton: false,

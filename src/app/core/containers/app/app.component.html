@@ -9,8 +9,8 @@
     </app-fab-item>
     <app-fab-item
         [show]='showCartButton$ | async'
-        (clicked)='showCart($event)'
-        [badgeCount]='lineItems.length'
+        [badgeCount]='(lineItems$ | async).length'
+        routerlink='/cart'
         icon='shopping_cart'>
     </app-fab-item>
     <app-fab-item
@@ -43,8 +43,3 @@
         </app-footer-item>
     </app-footer>
 </app-layout>
-
-<app-cart
-    *ngIf='showCart$ | async'
-    [lineItems]='lineItems'>
-</app-cart>

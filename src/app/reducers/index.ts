@@ -95,11 +95,6 @@ export const getRemovedItem = createSelector(
   fromCart.getRemovedItem
 );
 
-export const getShowCart = createSelector(
-  getCartState,
-  fromCart.getShowCart
-);
-
 export const getLineItems = createSelector(
   getCartState,
   fromCart.getLineItems

@@ -2,14 +2,9 @@ import { Action } from '@ngrx/store';
 import { LineItem } from 'src/app/shared';
 
 export enum CartActionTypes {
-    Open = '[Cart] Open',
-    Close = '[Cart] Close',
-    LoadCart = '[Cart] Load Item',
-    LoadCartSuccess = '[Cart] Load Success',
-    LoadCartFail = '[Cart] Load Fail',
-    // AddItemToCart = '[Cart] Add Item To Cart',
-    // AddItemToCartSuccess = '[Cart] Add Item Success To Cart',
-    // AddItemToCartFail = '[Cart] Add Item Fail To Cart',
+    LoadCart = '[Cart] Load Cart',
+    LoadCartSuccess = '[Cart] Load Cart Success',
+    LoadCartFail = '[Cart] Load Cart Fail',
     AddItem = '[Cart] Add Item',
     // AddItemSuccess = '[Cart] Add Item Success',
     AddItemFail = '[Cart] Add Item Fail',
@@ -17,19 +12,6 @@ export enum CartActionTypes {
     RemoveItemSuccess = '[Cart] Remove Item Success',
     UpdateItemQuantity = '[Cart] Update Quantity',
     UpdateCart = '[Cart] Update Cart',
-    UpdateCartSuccess = '[Cart] Update Cart Success',
-    UpdateCartFail = '[Cart] Update Cart Fail',
-}
-
-/**
- * Open Close Cart Actions
- */
-export class Open implements Action {
-  readonly type = CartActionTypes.Open;
-}
-
-export class Close implements Action {
-  readonly type = CartActionTypes.Close;
 }
 
 /**
@@ -83,8 +65,6 @@ export class AddItem implements Action {
 
 // export class AddItemSuccess implements Action {
 //   readonly type = CartActionTypes.AddItemSuccess;
-
-//   constructor(public payload: LineItem) {}
 // }
 
 export class AddItemFail implements Action {
@@ -114,30 +94,14 @@ export class RemoveItemSuccess implements Action {
 export class UpdateCart implements Action {
   readonly type = CartActionTypes.UpdateCart;
 
-  constructor(public payload: LineItem) {}
-}
-
-export class UpdateCartSuccess implements Action {
-  readonly type = CartActionTypes.UpdateCartSuccess;
-}
-
-export class UpdateCartFail implements Action {
-  readonly type = CartActionTypes.UpdateCartFail;
-
-  constructor(public payload: any) {}
+  constructor(public payload: LineItem[]) {}
 }
 
 export type CartActions =
-  | Open
-  | Close
   | LoadCart
   | LoadCartSuccess
   | LoadCartFail
-  // | AddItemToCart
-  // | AddItemToCartSuccess
-  // | AddItemToCartFail
   | AddItem
-  // | AddItemSuccess
   | AddItemFail
   | RemoveItem
   | RemoveItemSuccess
