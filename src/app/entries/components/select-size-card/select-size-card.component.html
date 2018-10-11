@@ -2,7 +2,7 @@
   <mat-card-content>
     <p><strong>Select Size</strong></p>
     <mat-chip-list>
-      <mat-chip *ngFor="let variant of blend.variants">{{variant.title}}</mat-chip>
+      <mat-chip (click)='onChipClick(variant)' *ngFor="let variant of blend.variants">{{variant.title}}</mat-chip>
     </mat-chip-list>
   </mat-card-content>
 </mat-card>

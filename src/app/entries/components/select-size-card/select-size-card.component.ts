@@ -8,9 +8,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class SelectSizeCardComponent {
 
   @Input() blend: any
+
   @Output() selected = new EventEmitter()
 
   constructor() { }
+
+  onChipClick(event) {
+    this.selected.emit(event)
+  }
 
   ngOnInit() {
   }

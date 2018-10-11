@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Product } from 'src/app/shared';
+import { Product, Variant } from 'src/app/shared';
 
 export enum ProductActionTypes {
   Load = '[Product] Load',
@@ -8,6 +8,7 @@ export enum ProductActionTypes {
   List = '[Product] Load List',
   ListSuccess = '[Product] Load List Success',
   ListFail = '[Product] Load List Fail',
+  SelectVariant = '[Product] Variant Selected',
 }
 
 /**
@@ -49,6 +50,16 @@ export class ListFail implements Action {
 
   constructor(public payload: any) {}
 }
+
+/**
+ * Variant Actions
+ */
+export class SelectVariant implements Action {
+  readonly type = ProductActionTypes.SelectVariant;
+
+  constructor(public payload: Variant) {}
+}
+
 
 export type ProductActions =
   | Load

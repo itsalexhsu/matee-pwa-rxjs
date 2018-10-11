@@ -6,12 +6,13 @@ import { map } from 'rxjs/operators';
 
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 
+import * as fromEntries from '../../../entries/reducers';
 import * as fromAuth from '../../../auth/reducers';
 import * as fromRoot from '../../../reducers';
 import * as layout from '../../actions/layout';
 import * as cart from '../../actions/cart';
 
-import { GlobalService, LineItem } from '../../../shared'
+import { GlobalService, LineItem, Product } from '../../../shared'
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,8 @@ import { GlobalService, LineItem } from '../../../shared'
 export class AppComponent {
 
   lineItems: LineItem[] = []
+
+  blend$: Observable<Product> = this.store.pipe(select(fromEntries.getBlendResult))
 
   showFooter$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowFooter))
   showCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCartButton))
@@ -61,7 +64,6 @@ export class AppComponent {
         }
       }
     })
-
   }
 
   constructor(
@@ -69,9 +71,27 @@ export class AppComponent {
     private globalService: GlobalService,
   ) { }
 
+  checkOut(event) {
+    console.log(event)
+  }
+
+  addToCart(event) {
+    if (event) {
+      this.blend$
+      .pipe(map(payload => payload))
+      .subscribe((product: Product) => {
+        console.log(product)
+      })
+    }
+  }
+
   showCart(event) {
     if (event) {
       this.store.dispatch(new cart.Open)
+      this.store.dispatch(new layout.showCheckoutButton)
+      this.store.dispatch(new layout.HideFooter)
+      this.store.dispatch(new layout.hideCartButton)
+      this.store.dispatch(new layout.hideAddItemButton)
     }
   }
 

@@ -6,7 +6,7 @@ export enum LayoutActionTypes {
   showCartButton = '[layout] Show Cart Button',
   hideCartButton = '[layout] Hide Cart Button',
   showCheckoutButton = '[layout] Show Checkout Button',
-  hideCheckoutButton = '[layout] Show Checkout Button',
+  hideCheckoutButton = '[layout] Hide Checkout Button',
   ShowFooter = '[Layout] Show Footer',
   HideFooter = '[Layout] Hide Footer',
 }

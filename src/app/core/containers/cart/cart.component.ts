@@ -28,18 +28,16 @@ export class CartComponent {
     private cartService: CartService,
     private store: Store<fromRoot.State>,
   ) {
-    this.store.dispatch(new layout.HideFooter())
-    this.store.dispatch(new layout.hideCartButton())
-    this.store.dispatch(new layout.hideAddItemButton())
   }
 
   ngOnInit() {
   }
 
   closeCart() {
-    this.store.dispatch(new cart.Close)
+    this.store.dispatch(new layout.hideCheckoutButton)
     this.store.dispatch(new layout.ShowFooter)
     this.store.dispatch(new layout.showCartButton)
+    this.store.dispatch(new cart.Close)
   }
   
 }

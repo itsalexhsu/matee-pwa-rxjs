@@ -53,5 +53,6 @@
   <mat-divider></mat-divider>
 
   <app-select-size-card
-    [blend]='blend$ | async'>
+    [blend]='blend$ | async'
+    (selected)='onSizeSelect($event)'>
   </app-select-size-card>

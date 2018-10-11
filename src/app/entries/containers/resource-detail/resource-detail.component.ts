@@ -31,4 +31,8 @@ export class ResourceDetailComponent {
       .subscribe(store)
     }
 
+    onSizeSelect(event) {
+      console.log(event)
+    }
+
 }
