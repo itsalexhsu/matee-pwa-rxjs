@@ -46,6 +46,7 @@ export class CartService {
       localForage.getItem('lineItems')
       .then((res: string) => {
         if (res) {
+          this.lineItems = JSON.parse(res)
           resolve(res)
         }
       })
