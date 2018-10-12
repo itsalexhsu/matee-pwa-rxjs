@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { Store, select } from '@ngrx/store';
 import { tap, map, mergeMap } from 'rxjs/operators';
@@ -20,9 +21,12 @@ import * as cart from '../../actions/cart';
 })
 export class CartComponent {
 
+  checkoutLink$: Observable<string> = this.store.pipe(select(fromRoot.getCheckoutLink))
   lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
+  checkoutLink
 
   constructor(
+    private sanitizer: DomSanitizer,
     private cartService: CartService,
     private store: Store<fromRoot.State>,
   ) { }
@@ -32,6 +36,15 @@ export class CartComponent {
     this.store.dispatch(new layout.HideFooter)
     this.store.dispatch(new layout.ShowCheckoutButton)
     this.store.dispatch(new cart.LoadCart)
+
+    // this.checkoutLink$
+    // .pipe(map(payload => payload))
+    // .subscribe(link => {
+    //   if (link) {
+    //     console.log(link)
+    //     // this.checkoutLink = this.sanitizer.bypassSecurityTrustResourceUrl(link)
+    //   }
+    // })
   }
 
   ngOnDestroy() {

@@ -30,8 +30,6 @@ export class AppComponent {
 
   lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
 
-  checkoutLink$: Observable<string> = this.store.pipe(select(fromRoot.getCheckoutLink))
-
   showFooter$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowFooter))
   showCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCartButton))
   showAddCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getAddItemButton))
@@ -46,15 +44,6 @@ export class AppComponent {
     this.store.dispatch(new layout.ShowFooter)
     this.store.dispatch(new layout.ShowCartButton)
     this.store.dispatch(new cart.LoadCart)
-
-    this.checkoutLink$
-    .pipe(map(payload => payload))
-    .subscribe(link => {
-      if (link) {
-        let windowRef = window.open()
-        windowRef.location.href = link
-      }
-    })
   }
 
   constructor(

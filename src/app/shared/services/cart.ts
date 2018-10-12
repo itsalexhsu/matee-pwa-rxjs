@@ -37,7 +37,7 @@ export class CartService {
     return new Promise(resolve => {
       this.cartId = null
       this.lineItems = []
-      localForage.setItem('lineItems', [])
+      localForage.clear()
       resolve([])
     })
   }
