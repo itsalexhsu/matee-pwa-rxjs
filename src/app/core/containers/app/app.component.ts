@@ -39,11 +39,18 @@ export class AppComponent {
   // isLoggedIn$: Observable<boolean> = this.store.pipe(select(fromAuth.getAuthenticated))
 
   selectedVariant$: Observable<Variant> = this.store.pipe(select(fromEntries.getSelectedVariant))
+  variant: Variant
 
   ngOnInit() {
     this.store.dispatch(new layout.ShowFooter)
     this.store.dispatch(new layout.ShowCartButton)
     this.store.dispatch(new cart.LoadCart)
+
+    this.selectedVariant$
+    .pipe(map(payload => payload))
+    .subscribe((variant: Variant) => {
+      this.variant = variant
+    })
   }
 
   constructor(
@@ -57,15 +64,11 @@ export class AppComponent {
 
   addVariantToCart(event) {
     if (event) {
-      this.selectedVariant$
-      .pipe(map(payload => payload))
-      .subscribe((variant: Variant) => {
-        let lineItem = new LineItem(variant, 1)
-        this.store.dispatch(new cart.AddItem(lineItem))
+      let lineItem = new LineItem(this.variant, 1)
+      this.store.dispatch(new cart.AddItem(lineItem))
 
-        let message = {message: 'Item added to cart', action: 'Close' }
-        this.store.dispatch(new snackbar.ShowSnackbar(message))
-      })
+      let message = {message: 'Item added to cart', action: 'Close' }
+      this.store.dispatch(new snackbar.ShowSnackbar(message))
     }
   }
 
