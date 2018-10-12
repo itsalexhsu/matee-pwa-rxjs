@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as fromRoot from '../../../reducers';
 import * as cart from '../../actions/cart';
+import * as snackbar from '../../../core/actions/snackbar';
 
 import { LineItem } from 'src/app/shared';
 
@@ -52,6 +53,9 @@ export class CartItemsComponent {
   onRemoveFromCart(event) {
     if (event) {
       this.store.dispatch (new cart.RemoveItem(this.lineItem))
+
+      let message = {message: 'Item removed from cart', action: 'Close' }
+      this.store.dispatch(new snackbar.ShowSnackbar(message))
     }
   }
 

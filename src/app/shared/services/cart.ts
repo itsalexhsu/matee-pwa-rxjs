@@ -105,7 +105,6 @@ export class CartService {
             this.store.dispatch(new checkout.CreateFail(JSON.stringify(error)))
           })
         }
-        
       }
     )
   }

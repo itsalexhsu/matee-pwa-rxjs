@@ -12,6 +12,7 @@ import * as fromRoot from '../../../reducers';
 import * as layout from '../../actions/layout';
 import * as cart from '../../actions/cart';
 import * as checkout from '../../actions/checkout';
+import * as snackbar from '../../../core/actions/snackbar';
 
 import { LineItem, Product, Variant } from '../../../shared'
 
@@ -58,6 +59,9 @@ export class AppComponent {
       .subscribe((variant: Variant) => {
         let lineItem = new LineItem(variant, 1)
         this.store.dispatch(new cart.AddItem(lineItem))
+
+        let message = {message: 'Item added to cart', action: 'Close' }
+        this.store.dispatch(new snackbar.ShowSnackbar(message))
       })
     }
   }
