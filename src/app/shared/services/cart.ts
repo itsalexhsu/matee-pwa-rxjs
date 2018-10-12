@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as checkout from '../../core/actions/checkout'
 import * as cart from '../../core/actions/cart'
 import * as fromRoot from '../../reducers';
 
@@ -31,89 +32,66 @@ export class CartService {
     return localForage.setItem('lineItems', JSON.stringify(lineItems))
   }
 
+  clearItems() {
+    return new Promise(resolve => {
+      this.cartId = null
+      this.lineItems = []
+      resolve([])
+    })
+  }
+
+  loadItems() {
+    return new Promise(resolve => {
+      localForage.getItem('lineItems')
+      .then((res: string) => {
+        if (res) {
+          resolve(res)
+        }
+      })
+    })
+  }
+
   addItem(lineItem: LineItem) {
     return new Promise(resolve => {
-      if (this.cartId) {
-        this.shopifyService.addVariantsToCheckout(this.cartId, [lineItem]).then(
-          ({ model, data }) => {
-            if (!data.checkoutLineItemsAdd.userErrors.length) {
-              this.lineItems.push(lineItem);
-              let i = 0;
-              data.checkoutLineItemsAdd.checkout.lineItems.edges.forEach(edge => {
-                if (edge.node.variant.id = lineItem.variantId) {
-                  this.lineItems[i].id = edge.node.id;
-                }
-                i++;
-              });
-            } else {
-              data.checkoutLineItemsAdd.userErrors.forEach(error => {
-                alert(JSON.stringify(error));
-              });
-            }
-          }, err => alert(err)
-        )
-      } else {
-        this.lineItems.push(lineItem)
-        resolve(this.storeItems(this.lineItems))
-      }
+      this.lineItems.push(lineItem)
+      resolve(this.storeItems(this.lineItems))
     })
   }
 
   removeItem(lineItem: LineItem) {
-    if (this.cartId) {
-      this.shopifyService.removeLineItem(this.cartId, lineItem.id).then(
-        ({ model, data }) => {
-          if (!data.checkoutLineItemsRemove.userErrors.length) {
-            this.removeItemFromArray(lineItem);
-          } else {
-            data.checkoutLineItemsRemove.userErrors.forEach(error => {
-              alert(JSON.stringify(error));
-            });
-          }
-        }, err => alert(err)
-      )
-    } else {
-      this.removeItemFromArray(lineItem);
-    }
+    return new Promise(resolve => {
+      let newItems = this.removeItemFromArray(lineItem)
+      if (newItems) {
+        resolve(this.storeItems(newItems))
+      }
+    })
   }
 
-  removeItemFromArray(lineItem) {
+  removeItemFromArray(lineItem: LineItem) {
 
       let lineItems = this.lineItems
       let index = lineItems.indexOf(lineItem);
 
       if (index!=-1) {
           lineItems.splice(index, 1)
-          this.lineItems = lineItems
+          return lineItems
       }
   }
 
   createUpdateCheckout() {
-    if (!this.cartId) {
-      this.shopifyService.createCheckout(this.lineItems).then(
-        ({ model, data }) => {
-          if (!data.checkoutCreate.userErrors.length) {
-            this.cartId = data.checkoutCreate.checkout.id;
-            this.openCheckout(data.checkoutCreate.checkout);
-            let i = 0;
-            data.checkoutCreate.checkout.lineItems.edges.forEach(edge => {
-              this.lineItems[i].id = edge.node.id;
-              i++;
-            });
-          } else {
-            data.checkoutCreate.userErrors.forEach(error => {
-              alert(JSON.stringify(error));
-            });
-          }
-        }, err => alert(err)
-      );
-    } else {
-      this.shopifyService.fetchCheckout(this.cartId).then(
-        ({ model, data }) => {
-          this.openCheckout(data.checkout);
-        }, err => alert(err)
-      )
-    }
+    this.shopifyService.createCheckout(this.lineItems).then(
+      ({ model, data }) => {
+        if (!data.checkoutCreate.userErrors.length) {
+          this.cartId = data.checkoutCreate.checkout.id;
+          this.openCheckout(data.checkoutCreate.checkout);
+          this.store.dispatch(new cart.ClearCart)
+        } else {
+          data.checkoutCreate.userErrors.forEach(error => {
+            this.store.dispatch(new checkout.CreateFail(JSON.stringify(error))
+          });
+        }
+      }, err => alert(err)
+    );
   }
 
   get total(): number {

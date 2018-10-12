@@ -11,6 +11,7 @@ export enum CartActionTypes {
     RemoveItem = '[Cart] Remove Item',
     RemoveItemSuccess = '[Cart] Remove Item Success',
     UpdateItemQuantity = '[Cart] Update Quantity',
+    ClearCart = '[Cart] Clear Cart',
     UpdateCart = '[Cart] Update Cart',
 }
 
@@ -97,6 +98,14 @@ export class UpdateCart implements Action {
   constructor(public payload: LineItem[]) {}
 }
 
+/**
+ * Clear Cart Actions
+ */
+export class ClearCart implements Action {
+  readonly type = CartActionTypes.ClearCart;
+}
+
+
 export type CartActions =
   | LoadCart
   | LoadCartSuccess
@@ -106,3 +115,4 @@ export type CartActions =
   | RemoveItem
   | RemoveItemSuccess
   | UpdateCart
+  | ClearCart

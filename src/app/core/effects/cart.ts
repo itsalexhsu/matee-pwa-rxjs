@@ -17,6 +17,8 @@ import {
     CartActionTypes,
     AddItem,
     AddItemFail,
+    RemoveItem,
+    RemoveItemSuccess,
     LoadCartSuccess,
     LoadCartFail,
     UpdateCart,
@@ -38,12 +40,37 @@ export class CartEffects {
         )
     );
 
+
+    @Effect()
+    removeItem: Observable<Action> = this.actions$.pipe(
+        ofType(CartActionTypes.RemoveItem),
+        map((action: RemoveItem) => action.payload),
+        switchMap((lineItem: LineItem) => 
+          from(this.cartService.removeItem(lineItem))
+          .pipe(
+            map((res: string) => new UpdateCart(JSON.parse(res))),
+            catchError(err => of(new AddItemFail(err)))
+          )
+        )
+    );
+
     @Effect()
     loadItems: Observable<Action> = this.actions$.pipe(
       ofType(CartActionTypes.LoadCart),
       switchMap(() =>
-        from(localForage.getItem('lineItems')).pipe(
+        from(this.cartService.loadItems()).pipe(
           map((res: string) => new LoadCartSuccess(JSON.parse(res))),
+          catchError(err => of(new LoadCartFail(err)))
+        )
+      )
+    );
+
+    @Effect()
+    clearItems: Observable<Action> = this.actions$.pipe(
+      ofType(CartActionTypes.ClearCart),
+      switchMap(() =>
+        from(this.cartService.clearItems()).pipe(
+          map((res: any) => new UpdateCart(res)),
           catchError(err => of(new LoadCartFail(err)))
         )
       )

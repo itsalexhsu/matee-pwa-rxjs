@@ -150,8 +150,6 @@ export class ShopifyService {
 
   addVariantsToCheckout(_checkoutid, _lineItems): Promise<any> {
 
-    console.log('Test')
-
     const checkoutId = this.client.variable('checkoutId', 'ID!');
     const _lineItemsForCheckout = _lineItems.map(item => { return { 'id': item.id, 'variantId': item.variantId, 'quantity': item.quantity } })
     const lineItems = this.client.variable('lineItems', '[CheckoutLineItemInput!]!');

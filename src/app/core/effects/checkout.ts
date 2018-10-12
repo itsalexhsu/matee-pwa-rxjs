@@ -17,12 +17,11 @@ import {
 @Injectable()
 export class CheckoutEffects {
 
-    @Effect()
-    createUpdateCheckout$: Observable<Action> = this.actions$.pipe(
+    @Effect({ dispatch: false })
+    createUpdateCheckout$ = this.actions$.pipe(
         ofType(CheckoutActionTypes.CreateUpdate),
-        tap(() => {
-          this.cart.createUpdateCheckout()
-        })
+        switchMap(() => of(this.cart.createUpdateCheckout())
+        )
     );
 
     constructor(

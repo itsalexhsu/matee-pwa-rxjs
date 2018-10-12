@@ -41,11 +41,11 @@ export class FeaturedProductsComponent {
     
   }
 
-  ngOnInit() {
-    this.shopifyService.getProductById(this.product.id)
-    .then(product => {
-      this.productDetails = product
-    })
+  ngOnChanges() {
+      this.shopifyService.getProductById(this.product.id)
+      .then(product => {
+        this.productDetails = product
+      })
   }
 
 }
