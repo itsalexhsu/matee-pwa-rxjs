@@ -61,3 +61,12 @@ export function Id() {
     return v.toString(16);
   })
 }
+
+export function indexOf(arr, o) {    
+      for (var i = 0; i < arr.length; i++) {
+          if (arr[i].x == o.x && arr[i].y == o.y) {
+              return i;
+          }
+      }
+      return -1;
+  }

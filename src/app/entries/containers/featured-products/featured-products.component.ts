@@ -7,6 +7,7 @@ import * as cart from '../../../core/actions/cart';
 
 import * as fromEntries from '../../reducers/';
 import * as product from '../../actions/product';
+import * as snackbar from '../../../core/actions/snackbar';
 
 import { Product, Variant, ShopifyService, LineItem } from '../../../shared';
 import { switchMap, map } from 'rxjs/operators';
@@ -25,6 +26,9 @@ export class FeaturedProductsComponent {
     if (event) {
       let lineItem = new LineItem(this.productDetails.variants[0], 1)
       this.store.dispatch(new cart.AddItem(lineItem))
+
+      let message = {message: 'Item added to cart', action: 'Close' }
+      this.store.dispatch(new snackbar.ShowSnackbar(message))
     }
   }
 

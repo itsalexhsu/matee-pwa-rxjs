@@ -9,6 +9,7 @@ import { Observable, Subscription, from, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { ShopifyService } from './shopify';
+import { indexOf } from '../../shared/utils';
 
 import { LineItem } from '../models/lineItem.model';
 
@@ -70,7 +71,7 @@ export class CartService {
   removeItemFromArray(lineItem: LineItem) {
 
       let lineItems = this.lineItems
-      let index = lineItems.indexOf(lineItem);
+      let index = indexOf(lineItems, lineItem)
 
       if (index!=-1) {
           lineItems.splice(index, 1)
@@ -79,19 +80,22 @@ export class CartService {
   }
 
   createUpdateCheckout() {
-    this.shopifyService.createCheckout(this.lineItems).then(
-      ({ model, data }) => {
+    this.shopifyService.createCheckout(this.lineItems)
+    .then(
+      ({model, data}) => {
+
         if (!data.checkoutCreate.userErrors.length) {
-          this.cartId = data.checkoutCreate.checkout.id;
-          this.openCheckout(data.checkoutCreate.checkout);
+          this.cartId = data.checkoutCreate.checkout.id
+          this.openCheckout(data.checkoutCreate.checkout)
           this.store.dispatch(new cart.ClearCart)
         } else {
           data.checkoutCreate.userErrors.forEach(error => {
-            this.store.dispatch(new checkout.CreateFail(JSON.stringify(error))
-          });
+            this.store.dispatch(new checkout.CreateFail(JSON.stringify(error)))
+          })
         }
-      }, err => alert(err)
-    );
+        
+      }
+    )
   }
 
   get total(): number {
@@ -100,7 +104,7 @@ export class CartService {
   }
 
   openCheckout(checkout) {
-    window.open(checkout.webUrl);
+    window.open(checkout.webUrl,'_blank');
   }
 
 }
