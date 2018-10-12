@@ -7,19 +7,22 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SelectSizeCardComponent {
 
-  @Input() blend: any
+  @Input() product: any
 
   @Output() selected = new EventEmitter()
+
+  selectedIndex: number = 0
 
   constructor() {
   }
 
-  onChipClick(event) {
-    this.selected.emit(event)
+  onChipClick(variant, index) {
+    this.selectedIndex = index
+    this.selected.emit(variant)
   }
 
   ngOnChanges() {
-    this.selected.emit(this.blend.variants[0])
+    this.selected.emit(this.product.variants[0])
   }
 
 }

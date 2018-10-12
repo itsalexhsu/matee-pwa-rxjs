@@ -111,7 +111,7 @@ export class CartService {
       )
   }
 
-  get total(): number {
+  total(): number {
     if (this.lineItems.length) return this.lineItems.map(lineItem => lineItem.quantity * (+lineItem.variant.price)).reduce((prev, next) => prev + next);
     else return 0;
   }

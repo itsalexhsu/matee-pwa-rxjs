@@ -1,6 +1,6 @@
 
 <app-blend-summary
-  [blend]='blend$ | async'
+  [blend]='product$ | async'
   [showCreateDate]='false'>
 </app-blend-summary>
 
@@ -22,7 +22,7 @@
 <mat-divider></mat-divider>
 
 <app-select-size-card
-  [blend]='blend$ | async'
+  [product]='product$ | async'
   (selected)='onSizeSelect($event)'>
 </app-select-size-card>
 

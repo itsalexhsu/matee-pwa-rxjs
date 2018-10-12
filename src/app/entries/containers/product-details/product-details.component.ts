@@ -21,7 +21,8 @@ import { Product, LineItem } from 'src/app/shared';
 })
 export class ProductDetailsComponent {
 
-  blend$: Observable<Product> = this.store.pipe(select(fromEntries.getBlendResult))
+  product$: Observable<Product> = this.store.pipe(select(fromEntries.getBlendResult))
+  index: number
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -31,9 +32,9 @@ export class ProductDetailsComponent {
       .subscribe(store)
     }
 
-    onSizeSelect(variant) {
-      if (variant) {
-        this.store.dispatch(new product.SelectVariant(variant))
+    onSizeSelect(event) {
+      if (event) {
+        this.store.dispatch(new product.SelectVariant(event))
       }
     }
 
