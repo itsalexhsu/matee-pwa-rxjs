@@ -99,7 +99,6 @@ export class CartService {
 
           if (!data.checkoutCreate.userErrors.length) {
             this.cartId = data.checkoutCreate.checkout.id
-            // resolve(data.checkoutCreate.checkout.webUrl)
             // this.openCheckout(data.checkoutCreate.checkout)
             this.store.dispatch(new checkout.Open(data.checkoutCreate.checkout.webUrl))
             this.store.dispatch(new cart.ClearCart)

@@ -6,7 +6,7 @@
       <span>
         <button
           mat-icon-button
-          [routerLink]="['/products']">
+          [routerLink]="['/']">
           <mat-icon>close</mat-icon>
         </button>
       </span>
@@ -18,8 +18,12 @@
     [lineItem]='lineItem'>
   </app-cart-items>
 
-</div>
+  <mat-card class="mat-elevation-z0">
+    <button
+      mat-button color="primary"
+      [routerLink]="['/products']">
+      Add more items
+    </button>
+  </mat-card>
 
-<!-- <iframe [src]='checkoutLink'>
-  
-</iframe> -->
+</div>

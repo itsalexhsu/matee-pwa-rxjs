@@ -23,7 +23,6 @@ export class CartComponent {
 
   checkoutLink$: Observable<string> = this.store.pipe(select(fromRoot.getCheckoutLink))
   lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
-  checkoutLink
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -36,15 +35,6 @@ export class CartComponent {
     this.store.dispatch(new layout.HideFooter)
     this.store.dispatch(new layout.ShowCheckoutButton)
     this.store.dispatch(new cart.LoadCart)
-
-    // this.checkoutLink$
-    // .pipe(map(payload => payload))
-    // .subscribe(link => {
-    //   if (link) {
-    //     console.log(link)
-    //     // this.checkoutLink = this.sanitizer.bypassSecurityTrustResourceUrl(link)
-    //   }
-    // })
   }
 
   ngOnDestroy() {
