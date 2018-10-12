@@ -54,8 +54,19 @@ export class CartService {
 
   addItem(lineItem: LineItem) {
     return new Promise(resolve => {
-      this.lineItems.push(lineItem)
-      resolve(this.storeItems(this.lineItems))
+
+      localForage.getItem('lineItems')
+      .then((res: string) => {
+        if (res) {
+          let lineItems = JSON.parse(res)
+          lineItems.push(lineItem)
+          this.lineItems = lineItems
+          resolve(this.storeItems(lineItems))
+        } else {
+          this.lineItems.push(lineItem)
+          resolve(this.storeItems(this.lineItems))
+        }
+      })
     })
   }
 
