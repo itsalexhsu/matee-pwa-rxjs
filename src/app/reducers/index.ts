@@ -25,6 +25,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  */
 
 // import * as fromCore from '../core/reducers/core';
+import * as fromCheckout from '../core/reducers/checkout';
 import * as fromCart from '../core/reducers/cart';
 import * as fromLayout from '../core/reducers/layout';
 import * as fromSnackbar from '../core/reducers/snackbar';
@@ -34,6 +35,7 @@ import * as fromSnackbar from '../core/reducers/snackbar';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
+  checkout: fromCheckout.State;
   cart: fromCart.State;
   layout: fromLayout.State;
   snackbar: fromSnackbar.State;
@@ -46,6 +48,7 @@ export interface State {
  * and the current or initial state and return a new immutable state.
  */
 export const reducers: ActionReducerMap<State> = {
+  checkout: fromCheckout.reducer,
   cart: fromCart.reducer,
   layout: fromLayout.reducer,
   snackbar: fromSnackbar.reducer,
@@ -80,7 +83,18 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
   : [localStorageSyncReducer];
 
 /**
- * Layout Reducers
+ * Checkout Reducers
+ */
+
+export const getCheckoutState = createFeatureSelector<fromCheckout.State>('checkout');
+
+export const getCheckoutLink = createSelector(
+  getCheckoutState,
+  fromCheckout.getCheckoutLink
+);
+
+/**
+ * Cart Reducers
  */
 
 export const getCartState = createFeatureSelector<fromCart.State>('cart');

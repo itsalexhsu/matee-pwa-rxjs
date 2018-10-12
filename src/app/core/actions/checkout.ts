@@ -1,9 +1,16 @@
 import { Action } from '@ngrx/store';
 
 export enum CheckoutActionTypes {
+  Open = '[Checkout] Open',
   CreateUpdate = '[Checkout] Create or Update',
   CreateSuccess = '[Checkout] Create Success',
   CreateFail = '[Checkout] Create Fail',
+}
+
+export class Open implements Action {
+  readonly type = CheckoutActionTypes.Open;
+
+  constructor(public payload: string) {}
 }
 
 /**
@@ -26,6 +33,7 @@ export class CreateFail implements Action {
 }
 
 export type CheckoutActions =
+  | Open
   | CreateUpdate
   | CreateSuccess
   | CreateFail

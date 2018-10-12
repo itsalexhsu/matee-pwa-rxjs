@@ -37,6 +37,7 @@ export class CartService {
     return new Promise(resolve => {
       this.cartId = null
       this.lineItems = []
+      localForage.setItem('lineItems', [])
       resolve([])
     })
   }
@@ -92,21 +93,23 @@ export class CartService {
   }
 
   createUpdateCheckout() {
-    this.shopifyService.createCheckout(this.lineItems)
-    .then(
-      ({model, data}) => {
+      this.shopifyService.createCheckout(this.lineItems)
+      .then(
+        ({model, data}) => {
 
-        if (!data.checkoutCreate.userErrors.length) {
-          this.cartId = data.checkoutCreate.checkout.id
-          this.openCheckout(data.checkoutCreate.checkout)
-          this.store.dispatch(new cart.ClearCart)
-        } else {
-          data.checkoutCreate.userErrors.forEach(error => {
-            this.store.dispatch(new checkout.CreateFail(JSON.stringify(error)))
-          })
+          if (!data.checkoutCreate.userErrors.length) {
+            this.cartId = data.checkoutCreate.checkout.id
+            // resolve(data.checkoutCreate.checkout.webUrl)
+            // this.openCheckout(data.checkoutCreate.checkout)
+            this.store.dispatch(new checkout.Open(data.checkoutCreate.checkout.webUrl))
+            this.store.dispatch(new cart.ClearCart)
+          } else {
+            data.checkoutCreate.userErrors.forEach(error => {
+              this.store.dispatch(new checkout.CreateFail(JSON.stringify(error)))
+            })
+          }
         }
-      }
-    )
+      )
   }
 
   get total(): number {
@@ -114,8 +117,8 @@ export class CartService {
     else return 0;
   }
 
-  openCheckout(checkout) {
-    window.open(checkout.webUrl,'_blank');
-  }
+  // openCheckout(checkout) {
+  //   window.open(checkout.webUrl,'_blank');
+  // }
 
 }
