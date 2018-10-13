@@ -64,7 +64,7 @@ export class AppComponent {
   }
 
   checkOut(event) {
-    window.open(this.checkoutLink)
+    window.location.href = this.checkoutLink
     this.store.dispatch(new cart.ClearCart)
   }
 
