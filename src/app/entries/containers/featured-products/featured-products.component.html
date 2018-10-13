@@ -1,6 +1,11 @@
-<app-blend-detail
-  [blend]='productDetails'
-  [title]='title'
-  (addToCart)='onAddToCartClick($event)'
-  (toggleFavorite)='onToggleFavoriteClick($event)'>
-</app-blend-detail>
+<app-blend-card
+  (addToCart)='onAddToCart($event)'
+  (toggleFavorite)='onToggleFavorite($event)'
+  [title]=' this.productDetails.title ? this.productDetails.title : "Loading..." '
+  [description]='this.productDetails.description'
+  [image]='this.productDetails.image'
+  [altText]='this.productDetails.altText'
+  [id]='this.productDetails.id'
+  [showAddToCart]='true'
+  [showFavorite]='true'>
+</app-blend-card>

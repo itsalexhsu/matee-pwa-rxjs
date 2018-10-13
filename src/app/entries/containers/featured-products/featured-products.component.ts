@@ -14,7 +14,7 @@ import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-featured-products',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './featured-products.component.html',
   styleUrls: ['./featured-products.component.scss']
 })
@@ -23,7 +23,7 @@ export class FeaturedProductsComponent {
   @Input() product: Product
   productDetails
 
-  onAddToCartClick(event) {
+  onAddToCart(event) {
     if (event) {
       let lineItem = new LineItem(this.productDetails.variants[0], 1)
       this.store.dispatch(new cart.AddItem(lineItem))
@@ -33,7 +33,7 @@ export class FeaturedProductsComponent {
     }
   }
 
-  onToggleFavoriteClick(event) {
+  onToggleFavorite(event) {
     if (event) {
       console.log(event)
     }
@@ -47,10 +47,12 @@ export class FeaturedProductsComponent {
   }
 
   ngOnChanges() {
-      this.shopifyService.getProductById(this.product.id)
-      .then(product => {
+    this.shopifyService.getProductById(this.product.id)
+    .then(product => {
+      if (product) {
         this.productDetails = product
-      })
+      }
+    })
   }
 
 }

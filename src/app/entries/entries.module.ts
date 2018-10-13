@@ -22,7 +22,6 @@ import { CreateBlendsComponent } from './components/create-blends/create-blends.
 import { FavoriteBlendsComponent } from './components/favorite-blends/favorite-blends.component';
 import { BlendSummaryComponent } from './components/blend-summary/blend-summary.component';
 import { SelectSizeCardComponent } from './components/select-size-card/select-size-card.component';
-import { BlendDetailComponent } from './components/blend-detail/blend-detail.component';
 
 import { ArchiveConfirmationComponent } from './dialog/archive-confirmation/archive-confirmation.component';
 
@@ -41,7 +40,6 @@ const COMPONENTS = [
   FavoriteBlendsComponent,
   BlendSummaryComponent,
   SelectSizeCardComponent,
-  BlendDetailComponent,
   ProductsComponent,
   ProductComponent,
   ProductDetailsComponent,
