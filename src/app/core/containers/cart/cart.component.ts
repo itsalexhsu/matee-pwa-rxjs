@@ -12,6 +12,7 @@ import { LineItem } from '../../../shared'
 import * as fromRoot from '../../../reducers/';
 import * as layout from '../../../core/actions/layout';
 import * as cart from '../../actions/cart';
+import * as checkout from '../../actions/checkout';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,6 @@ import * as cart from '../../actions/cart';
 })
 export class CartComponent {
 
-  checkoutLink$: Observable<string> = this.store.pipe(select(fromRoot.getCheckoutLink))
   lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
 
   constructor(
@@ -31,10 +31,10 @@ export class CartComponent {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new checkout.CreateUpdate)
     this.store.dispatch(new layout.HideCartButton)
     this.store.dispatch(new layout.HideFooter)
     this.store.dispatch(new layout.ShowCheckoutButton)
-    this.store.dispatch(new cart.LoadCart)
   }
 
   ngOnDestroy() {

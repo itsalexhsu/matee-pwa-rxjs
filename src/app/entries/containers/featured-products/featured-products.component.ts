@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -14,6 +14,7 @@ import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-featured-products',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './featured-products.component.html',
   styleUrls: ['./featured-products.component.scss']
 })

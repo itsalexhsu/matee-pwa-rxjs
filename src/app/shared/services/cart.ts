@@ -100,8 +100,7 @@ export class CartService {
           if (!data.checkoutCreate.userErrors.length) {
             this.cartId = data.checkoutCreate.checkout.id
             // this.openCheckout(data.checkoutCreate.checkout)
-            this.store.dispatch(new checkout.Open(data.checkoutCreate.checkout.webUrl))
-            this.store.dispatch(new cart.ClearCart)
+            this.store.dispatch(new checkout.CreateSuccess(data.checkoutCreate.checkout.webUrl))
           } else {
             data.checkoutCreate.userErrors.forEach(error => {
               this.store.dispatch(new checkout.CreateFail(JSON.stringify(error)))

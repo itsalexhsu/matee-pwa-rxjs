@@ -14,7 +14,7 @@ export function reducer(
 ): State {
   switch (action.type) {
 
-    case CheckoutActionTypes.Open:
+    case CheckoutActionTypes.CreateSuccess:
         return {
         ...state,
         checkoutLink: action.payload,
