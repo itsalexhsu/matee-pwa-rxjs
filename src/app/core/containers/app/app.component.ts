@@ -32,8 +32,8 @@ export class AppComponent {
   showAddCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getAddItemButton))
   showCheckoutButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCheckoutButton))
 
-  // user$: Observable<CognitoUserAttribute[]> = this.store.pipe(select(fromAuth.getUserAttributes))
-  // isLoggedIn$: Observable<boolean> = this.store.pipe(select(fromAuth.getAuthenticated))
+  user$: Observable<CognitoUserAttribute[]> = this.store.pipe(select(fromAuth.getUserAttributes))
+  isLoggedIn$: Observable<boolean> = this.store.pipe(select(fromAuth.getAuthenticated))
 
   variant$: Observable<Variant> = this.store.pipe(select(fromEntries.getSelectedVariant))
   

@@ -8,6 +8,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 export class FabItemComponent {
 
   @Input() show: boolean
+  @Input() disable: boolean
   @Input() hideBadge: boolean
   @Input() routerlink: string
   @Input() badgeCount: number

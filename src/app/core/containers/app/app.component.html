@@ -15,6 +15,7 @@
     </app-fab-item>
     <app-fab-item
         [show]='showCheckoutButton$ | async'
+        [disable]='(lineItems$ | async).length === 0 ? true : false'
         (clicked)='checkOut($event)'
         hideBadge='true'
         icon='arrow_forward_ios'>
