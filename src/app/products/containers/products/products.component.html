@@ -1,0 +1,51 @@
+<div class="header">
+  <mat-toolbar>
+    <span></span>
+    <span>Orders</span>
+    <span>
+      <button
+        mat-icon-button
+        [routerLink]="['/']">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+</div>
+
+<mat-tab-group mat-stretch-tabs>
+  
+  <mat-tab label="Featured">
+    <ng-template matTabContent>
+      <app-featured-product
+        *ngFor="let product of products$ | async"
+        [product]='product'>
+        <!-- Featured Blends -->
+      </app-featured-product>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Create">
+    <ng-template matTabContent>
+      <app-create-product>
+        <!-- Create Blends -->
+      </app-create-product>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Favorites">
+    <ng-template matTabContent>
+      <app-favorite-product>
+        <!-- Favorite Blends -->
+      </app-favorite-product>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Previous">
+    <ng-template matTabContent>
+      <app-previous-product>
+        <!-- Previous Blends -->
+      </app-previous-product>
+    </ng-template>
+  </mat-tab>
+
+</mat-tab-group>

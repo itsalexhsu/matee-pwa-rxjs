@@ -1,13 +1,14 @@
 <button
-    mat-fab
-    color="primary"
-    matBadgeColor="warn"
-    matBadgePosition="after"
-    (click)="onClick(true)"
-    [disabled]='disable'
-    [matBadgeHidden]='hideBadge'
-    [routerLink]="routerlink"
-    [matBadge]="badgeCount"
-    *ngIf='show'>
-    <mat-icon>{{icon}}</mat-icon>
+  class="mat-elevation-z0"
+  mat-fab
+  color="primary"
+  matBadgeColor="warn"
+  matBadgePosition="after"
+  (click)="onClick(true)"
+  [disabled]='disable'
+  [matBadgeHidden]='hideBadge'
+  [routerLink]="routerlink"
+  [matBadge]="badgeCount"
+  *ngIf='show'>
+  <mat-icon>{{icon}}</mat-icon>
 </button>

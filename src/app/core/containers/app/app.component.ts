@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 
-import * as fromEntries from '../../../entries/reducers';
+import * as fromEntries from '../../../products/reducers';
 import * as fromAuth from '../../../auth/reducers';
 import * as fromRoot from '../../../reducers';
 import * as layout from '../../actions/layout';

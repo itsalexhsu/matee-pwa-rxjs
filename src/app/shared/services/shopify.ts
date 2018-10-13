@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import GraphQLJSClient from 'graphql-js-client';
-import typeBundle from '../../entries/services/types';
+import typeBundle from '../../products/services/types';
 
 @Injectable({
     providedIn: 'root'

@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z0">
+  <img
+  mat-card-image 
+  [src]="product.images[0].src"
+  [alt]="product.images[0].altText">
+  <mat-card-content>
+    <h1>{{product.title}}</h1>
+    <mat-card-subtitle>
+      <span
+        *ngIf='showCreateDate'>{{product.createdAt | date:'longDate' }}</span>
+    </mat-card-subtitle>
+    <p>{{product.description}}</p>
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>

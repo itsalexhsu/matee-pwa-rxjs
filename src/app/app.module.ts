@@ -21,7 +21,7 @@ import { reducers, metaReducers } from './reducers';
 // Modules
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
-import { EntriesModule } from './entries/entries.module';
+import { ProductsModule } from './products/products.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -44,7 +44,7 @@ import { environment } from '../environments/environment';
     AccountModule.forRoot(),
     AuthModule.forRoot(),
     CoreModule.forRoot(),
-    EntriesModule.forRoot(),
+    ProductsModule.forRoot(),
     SharedModule.forRoot(),
     DeviceDetectorModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),

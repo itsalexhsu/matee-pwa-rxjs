@@ -24,7 +24,6 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * notation packages up all of the exports into a single object.
  */
 
-// import * as fromCore from '../core/reducers/core';
 import * as fromCheckout from '../core/reducers/checkout';
 import * as fromCart from '../core/reducers/cart';
 import * as fromLayout from '../core/reducers/layout';

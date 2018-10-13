@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { NewsComponent } from './entries/containers/news/news.component';
+import { NewsComponent } from './products/containers/news/news.component';
 import { CartComponent } from './core/containers/cart/cart.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/entries', pathMatch: 'full' },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: 'cart', component: CartComponent },
   {
-    path: 'entries',
-    loadChildren: './entries/entries.module#EntriesModule',
+    path: 'products',
+    loadChildren: './products/products.module#ProductsModule',
   },
   { path: '**', component: NewsComponent },
 ];
