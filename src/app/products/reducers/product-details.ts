@@ -44,6 +44,15 @@ export function reducer(
       };
     }
 
+    case ProductActionTypes.LoadFail: {
+      return {
+        ...state,
+        Loaded: false,
+        Loading: false,
+        Data: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

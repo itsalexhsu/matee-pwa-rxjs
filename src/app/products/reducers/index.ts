@@ -6,10 +6,12 @@ import {
 import * as fromRoot from '../../reducers';
 import * as fromFeaturedProds from './featured-products';
 import * as fromProductDetail from './product-details';
+import * as fromLambdaProductDetail from './lambda-product-details';
 
 export interface ProductsState {
   productDetail: fromProductDetail.State;
   featuredProducts: fromFeaturedProds.State;
+  lambdaProductDetail: fromLambdaProductDetail.State;
 }
 
 export interface State extends fromRoot.State {
@@ -19,6 +21,7 @@ export interface State extends fromRoot.State {
 export const reducers: ActionReducerMap<ProductsState> = {
   productDetail: fromProductDetail.reducer,
   featuredProducts: fromFeaturedProds.reducer,
+  lambdaProductDetail: fromLambdaProductDetail.reducer,
 };
 
 // Blends Reducers
@@ -48,4 +51,14 @@ export const getProductResult = createSelector(
 export const getSelectedVariant = createSelector(
   ProductPageState,
   fromProductDetail.getSelectedVariant
+);
+
+export const LambdaProductPageState = createSelector(
+  getProductsEntityState,
+  (state: ProductsState) => state.lambdaProductDetail
+);
+
+export const getLambdaProductResult = createSelector(
+  LambdaProductPageState,
+  fromLambdaProductDetail.getLambdaProductResult
 );

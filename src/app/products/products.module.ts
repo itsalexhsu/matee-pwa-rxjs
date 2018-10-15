@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 //Effects
 import { ProductsEffects } from "./effects/products";
+import { LambdaProductsEffects } from "./effects/lambda";
 
 //Containers
 import { IngredientListComponent } from './containers/ingredient-list/ingredient-list.component';
@@ -22,6 +23,7 @@ import { FavoriteProductComponent } from './components/favorite-product/favorite
 import { PreviousProductComponent } from './components/previous-product/previous-product.component';
 import { SelectVariantComponent } from './components/select-variant/select-variant.component';
 import { ProductDetailSummaryComponent } from './components/product-detail-summary/product-detail-summary.component';
+import { ProductDetailBrewingGuideComponent } from './components/product-detail-brewing-guide/product-detail-brewing-guide.component';
 
 import { ArchiveConfirmationComponent } from './dialog/archive-confirmation/archive-confirmation.component';
 
@@ -31,6 +33,7 @@ import { reducers } from './reducers';
 import { routes } from './routes';
 
 import { SharedModule } from '../shared/shared.module';
+import { ProductDetailIngredientsComponent } from './components/product-detail-ingredients/product-detail-ingredients.component';
 
 const COMPONENTS = [
   ArchiveConfirmationComponent,
@@ -45,6 +48,7 @@ const COMPONENTS = [
   FeaturedProductComponent,
   NewsComponent,
   ProductDetailSummaryComponent,
+  ProductDetailBrewingGuideComponent,
 ]
 
 @NgModule({
@@ -55,9 +59,9 @@ const COMPONENTS = [
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('products', reducers),
-    EffectsModule.forFeature([ProductsEffects]),
+    EffectsModule.forFeature([ProductsEffects, LambdaProductsEffects]),
   ],
-  declarations: [COMPONENTS],
+  declarations: [COMPONENTS, ProductDetailIngredientsComponent],
   exports: [COMPONENTS],
   entryComponents: [ArchiveConfirmationComponent],
 })

@@ -4,22 +4,9 @@
   [showCreateDate]='false'>
 </app-product-detail-summary>
 
-<mat-card class="mat-elevation-z0">
-  <mat-card-subtitle>Brewing Guide</mat-card-subtitle>
-  <mat-grid-list cols="2" rowHeight="50px">
-    <mat-grid-tile
-        [colspan]="1"
-        [rowspan]="1">
-      <p>2 min</p>
-    </mat-grid-tile>
-    <mat-grid-tile
-        [colspan]="1"
-        [rowspan]="1">
-      <p>160 F</p>
-    </mat-grid-tile>
-  </mat-grid-list>
-</mat-card>
-<mat-divider></mat-divider>
+<app-product-detail-brewing-guide
+  [product]='lambdaProduct$ | async'>
+</app-product-detail-brewing-guide>
 
 <app-select-variant
   [product]='product$ | async'
@@ -32,7 +19,12 @@
 </mat-card>
 <mat-divider></mat-divider>
 
-<mat-card class="mat-elevation-z0">
+<app-product-detail-ingredients
+  *ngFor="let ingredient of (lambdaProduct$ | async).Ingredients"
+  [ingredient]='ingredient'>
+</app-product-detail-ingredients>
+
+<!-- <mat-card class="mat-elevation-z0">
     <mat-card-content>
       <mat-card-subtitle>Active Ingredients</mat-card-subtitle>
       <h3>Sage Leaf</h3>
@@ -40,7 +32,7 @@
       <p><strong>Flavor Profile:</strong> Aromatic. Bitter. Fragrant. Savory.</p>
     </mat-card-content>
     <mat-card-actions>
-      <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
+      <button mat-stroked-button color="primary">Add Ingredient</button>
     </mat-card-actions>
   </mat-card>
   <mat-divider></mat-divider>
@@ -52,7 +44,7 @@
       <p><strong>Flavor Profile:</strong> Peppery. Piney. Pungent. Woody.</p>
     </mat-card-content>
     <mat-card-actions>
-      <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
+      <button mat-stroked-button color="primary">Add Ingredient</button>
     </mat-card-actions>
   </mat-card>
-  <mat-divider></mat-divider>
+  <mat-divider></mat-divider> -->

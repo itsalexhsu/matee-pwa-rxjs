@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail-summary',
   templateUrl: './product-detail-summary.component.html',
-  styleUrls: ['./product-detail-summary.component.scss']
+  styleUrls: ['./product-detail-summary.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailSummaryComponent {
 
