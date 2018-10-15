@@ -15,8 +15,4 @@ export class ProductDetailIngredientsComponent {
   ngOnInit() {
   }
 
-  ngOnChanges() {
-    console.log(this.ingredient)
-  }
-
 }

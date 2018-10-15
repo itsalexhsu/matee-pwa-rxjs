@@ -1,0 +1,23 @@
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+    <!-- <mat-card-subtitle>Active Ingredients</mat-card-subtitle> -->
+    <h3>{{name}}</h3>
+    <p *ngIf='effects'><strong>Possibly effective for: </strong>
+      <span
+        *ngFor="let effect of effects">
+        {{effect}},&nbsp;
+      </span>
+    </p>
+    <p *ngIf='flavors'>
+      <strong>Flavor Profile: </strong>
+      <span
+        *ngFor="let flavor of flavors">
+        {{flavor}},&nbsp;
+      </span>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
+  </mat-card-actions>
+</mat-card>
+<mat-divider></mat-divider>

@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-blend-card',
   templateUrl: './blend-card.component.html',
-  styleUrls: ['./blend-card.component.scss']
+  styleUrls: ['./blend-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlendCardComponent {
 

@@ -29,8 +29,6 @@ export class ProductDetailsComponent {
     private activeRoute: ActivatedRoute,
     private store: Store<fromProducts.State>) {
 
-    this.lambdaProduct$.subscribe(x => console.log(x))
-
     this.activeRoute.params
       .pipe(map(payload => payload))
       .subscribe(params => {

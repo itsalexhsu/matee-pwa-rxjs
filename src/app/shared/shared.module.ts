@@ -8,9 +8,11 @@ import { MaterialModule } from '../material';
 
 // Components
 import { BlendCardComponent } from './components/blend-card/blend-card.component';
+import { IngredientCardComponent } from './components/ingredient-card/ingredient-card.component';
 
 const CONTAINER = [
 BlendCardComponent,
+IngredientCardComponent,
 ]
 
 @NgModule({
