@@ -1,0 +1,42 @@
+<!-- Create -->
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+      <h2>Select your ingredients</h2>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+    <h3>Organic Pure-Leaf Yerba Mate</h3>
+    <p>Our Yerba Mate is produced by drying leaf of the Yerba Mate plant grown in Argentina.</p>
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>
+
+<mat-card
+  class="mat-elevation-z0"
+  [routerLink]="['/ingredient-list']">
+  <mat-card-content>
+
+    <p><strong>Your Ingredients</strong></p>
+    <p *ngIf='!(selectedIngredients$ | async)'>Select your ingredients</p>
+    <ul>
+      <li
+        *ngFor="let ingredient of selectedIngredients$ | async">{{ingredient.Name}}</li>
+    </ul>
+
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>
+
+<app-select-variant
+  [product]='product$ | async'
+  (selected)='onSizeSelect($event)'>
+</app-select-variant>
+
+<!-- <app-ingredient-card
+  *ngFor="let ingredient of selectedIngredients$ | async"
+  [name]='ingredient.Name'
+  [flavors]='ingredient.Flavors'
+  [effects]='ingredient.Effects'>
+</app-ingredient-card> -->

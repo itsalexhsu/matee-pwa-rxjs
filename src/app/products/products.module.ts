@@ -8,22 +8,24 @@ import { EffectsModule } from '@ngrx/effects';
 //Effects
 import { ProductsEffects } from "./effects/products";
 import { LambdaProductsEffects } from "./effects/lambda";
+import { IngredientEffects } from "./effects/ingredient";
 
 //Containers
 import { IngredientListComponent } from './containers/ingredient-list/ingredient-list.component';
 import { ProductsComponent } from './containers/products/products.component';
 import { ProductComponent } from './containers/product/product.component';
-import { ProductDetailsComponent } from './containers/product-details/product-details.component';
 import { FeaturedProductComponent } from './containers/featured-product/featured-product.component';
 import { NewsComponent } from './containers/news/news.component';
+import { CreateProductComponent } from './containers/create-product/create-product.component';
 
 //Components
-import { CreateProductComponent } from './components/create-product/create-product.component';
 import { FavoriteProductComponent } from './components/favorite-product/favorite-product.component';
 import { PreviousProductComponent } from './components/previous-product/previous-product.component';
 import { SelectVariantComponent } from './components/select-variant/select-variant.component';
 import { ProductDetailSummaryComponent } from './components/product-detail-summary/product-detail-summary.component';
 import { ProductDetailBrewingGuideComponent } from './components/product-detail-brewing-guide/product-detail-brewing-guide.component';
+import { ProductDetailIngredientsComponent } from './components/product-detail-ingredients/product-detail-ingredients.component';
+import { IngredientComponent } from './components/ingredient/ingredient.component';
 
 import { ArchiveConfirmationComponent } from './dialog/archive-confirmation/archive-confirmation.component';
 
@@ -33,7 +35,6 @@ import { reducers } from './reducers';
 import { routes } from './routes';
 
 import { SharedModule } from '../shared/shared.module';
-import { ProductDetailIngredientsComponent } from './components/product-detail-ingredients/product-detail-ingredients.component';
 
 const COMPONENTS = [
   ArchiveConfirmationComponent,
@@ -44,11 +45,12 @@ const COMPONENTS = [
   SelectVariantComponent,
   ProductsComponent,
   ProductComponent,
-  ProductDetailsComponent,
   FeaturedProductComponent,
   NewsComponent,
   ProductDetailSummaryComponent,
   ProductDetailBrewingGuideComponent,
+  ProductDetailIngredientsComponent,
+  IngredientComponent
 ]
 
 @NgModule({
@@ -59,9 +61,9 @@ const COMPONENTS = [
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('products', reducers),
-    EffectsModule.forFeature([ProductsEffects, LambdaProductsEffects]),
+    EffectsModule.forFeature([ProductsEffects, LambdaProductsEffects, IngredientEffects]),
   ],
-  declarations: [COMPONENTS, ProductDetailIngredientsComponent],
+  declarations: [COMPONENTS],
   exports: [COMPONENTS],
   entryComponents: [ArchiveConfirmationComponent],
 })

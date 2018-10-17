@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-ingredient-card',
@@ -11,10 +11,18 @@ export class IngredientCardComponent {
   @Input() name: string
   @Input() effects
   @Input() flavors
+  @Input() showAddIngredient: boolean
+  @Input() isChecked: boolean
+
+  @Output() onIngredientCheck = new EventEmitter()
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onCheck(event) {
+    this.onIngredientCheck.emit(event)
   }
 
 }

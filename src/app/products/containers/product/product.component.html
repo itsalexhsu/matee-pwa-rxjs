@@ -11,5 +11,28 @@
     </span>
   </mat-toolbar>
 </div>
-  
-<app-product-details></app-product-details>
+
+<app-product-detail-summary
+  [product]='product$ | async'
+  [showCreateDate]='false'>
+</app-product-detail-summary>
+
+<app-product-detail-brewing-guide
+  [product]='lambdaProduct$ | async'>
+</app-product-detail-brewing-guide>
+
+<app-select-variant
+  [product]='product$ | async'
+  (selected)='onSizeSelect($event)'>
+</app-select-variant>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-subtitle>Base Ingredient</mat-card-subtitle>
+  <p><strong>Organic Pure-leaf Yerba Mate</strong></p>
+</mat-card>
+<mat-divider></mat-divider>
+
+<app-product-detail-ingredients
+  *ngFor="let ingredient of (lambdaProduct$ | async).Ingredients"
+  [ingredient]='ingredient'>
+</app-product-detail-ingredients>

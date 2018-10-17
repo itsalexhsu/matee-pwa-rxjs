@@ -1,4 +1,4 @@
-<app-blend-card
+<app-product-card
   (addToCart)='onAddToCart($event)'
   (toggleFavorite)='onToggleFavorite($event)'
   [title]=' this.productDetails.title ? this.productDetails.title : "Loading..." '
@@ -8,4 +8,4 @@
   [id]='this.productDetails.id'
   [showAddToCart]='true'
   [showFavorite]='true'>
-</app-blend-card>
+</app-product-card>

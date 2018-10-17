@@ -1,56 +1,39 @@
 <div class="header">
-    <mat-toolbar>
-      <span></span>
-      <span>Ingredients</span>
-      <span>
-        <button mat-icon-button [routerLink]="['/blends']">
-          <mat-icon>close</mat-icon>
-        </button>
-      </span>
-    </mat-toolbar>
-  </div>
+  <mat-toolbar>
+    <span></span>
+    <span>Ingredients</span>
+    <span>
+      <button mat-icon-button [routerLink]="['/products']">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+</div>
 
-  <mat-card class="mat-elevation-z0">
-      <mat-chip-list>
-        <mat-chip>Mental Performance</mat-chip>
-        <mat-chip>High cholesterol</mat-chip>
-        <mat-chip>Alzheimer's Disease</mat-chip>
-        <mat-chip>Digestive Health</mat-chip>
-      </mat-chip-list>
-  </mat-card>
-  <mat-divider></mat-divider>
+<!-- <mat-card class="mat-elevation-z0">
+    <mat-chip-list>
+      <mat-chip>Mental Performance</mat-chip>
+      <mat-chip>High cholesterol</mat-chip>
+      <mat-chip>Alzheimer's Disease</mat-chip>
+      <mat-chip>Digestive Health</mat-chip>
+    </mat-chip-list>
+</mat-card>
+<mat-divider></mat-divider> -->
 
-  <mat-card class="mat-elevation-z0">
-    <mat-card-content>
-        <h3>Sage Leaf</h3>
-        <p><strong>Possibly effective for:</strong> Alzheimer's disease. Mental performance. High cholesterol. Memory. Menopausal symptoms.</p>
-        <p><strong>Flavor Profile:</strong> Aromatic. Bitter. Fragrant. Savory.</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button color="primary">Add Ingredient</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-divider></mat-divider>
+<app-ingredient
+  *ngFor="let ingredient of ingredients$ | async"
+  [ingredient]='ingredient'
+  [selected]='selectedIngredients$ | async'
+  (onIngredientCheck)='onCheck($event)'>
+</app-ingredient>
 
-  <mat-card class="mat-elevation-z0">
-    <mat-card-content>
-        <h3>Rosemary Leaf</h3>
-        <p><strong>Flavor Profile:</strong> Peppery. Piney. Pungent. Woody.</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button color="primary">Add Ingredient</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-divider></mat-divider>
-
-  <mat-card class="mat-elevation-z0">
-    <mat-card-content>
-        <h3>Cinnamon Sticks</h3>
-        <p><strong>Flavor Profile:</strong> Aromatic. Fragrant. Spicy. Sweet. Warm. Woody</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-stroked-button color="primary">Add Ingredient</button>
-      </mat-card-actions>
-    </mat-card>
-  <mat-divider></mat-divider>
-  
+<div class="fab">
+  <button
+  class="mat-elevation-z0"
+  mat-fab
+  color="primary"
+  [disabled]='selectedIngredients.length == 0'
+  (click)="onSubmit(true)">
+    <mat-icon>check</mat-icon>
+  </button>
+</div>

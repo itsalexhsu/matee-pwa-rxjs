@@ -1,17 +1,21 @@
 import { LayoutActionTypes, LayoutActions } from '../actions/layout';
 
 export interface State {
+  showFab: boolean;
   showCartButton: boolean;
   showAddItemButton: boolean;
   showCheckoutButton: boolean
   showFooter: boolean;
+  disableAddItemButton: boolean;
 }
 
 const initialState: State = {
+  showFab: false,
   showCartButton: false,
   showAddItemButton: false,
   showCheckoutButton: false,
   showFooter: false,
+  disableAddItemButton: true,
 };
 
 export function reducer(
@@ -19,6 +23,18 @@ export function reducer(
   action: LayoutActions
 ): State {
   switch (action.type) {
+
+    case LayoutActionTypes.ShowFab:
+        return {
+        ...state,
+        showFab: true,
+    };
+
+    case LayoutActionTypes.HideFab:
+        return {
+        ...state,
+        showFab: false,
+    };
 
     case LayoutActionTypes.ShowCartButton:
         return {
@@ -32,7 +48,17 @@ export function reducer(
         showCartButton: false,
     };
 
+    case LayoutActionTypes.EnableAddItemButton:
+        return {
+        ...state,
+        disableAddItemButton: false,
+    };
 
+    case LayoutActionTypes.DisableAddItemButton:
+        return {
+        ...state,
+        disableAddItemButton: true,
+    };
 
     case LayoutActionTypes.ShowAddItemButton:
         return {
@@ -45,8 +71,6 @@ export function reducer(
         ...state,
         showAddItemButton: false,
     };
-
-
 
     case LayoutActionTypes.ShowCheckoutButton:
         return {
@@ -79,7 +103,9 @@ export function reducer(
   }
 }
 
+export const getShowFab = (state: State) => state.showFab;
 export const getShowFooter = (state: State) => state.showFooter;
 export const getShowCartButton = (state: State) => state.showCartButton;
 export const getShowCheckoutButton = (state: State) => state.showCheckoutButton;
 export const getAddItemButton = (state: State) => state.showAddItemButton;
+export const getDisableAddItemButton = (state: State) => state.disableAddItemButton;

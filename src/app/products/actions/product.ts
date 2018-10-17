@@ -8,7 +8,7 @@ export enum ProductActionTypes {
   List = '[Product] Load List',
   ListSuccess = '[Product] Load List Success',
   ListFail = '[Product] Load List Fail',
-  SelectVariant = '[Product] Variant Selected',
+  SelectVariant = '[Product] Select Variant',
 }
 
 /**

@@ -1,9 +1,10 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-fab-item',
   templateUrl: './fab-item.component.html',
-  styleUrls: ['./fab-item.component.scss']
+  styleUrls: ['./fab-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FabItemComponent {
 

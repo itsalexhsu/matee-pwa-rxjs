@@ -12,7 +12,9 @@
   </mat-toolbar>
 </div>
 
-<mat-tab-group mat-stretch-tabs>
+<mat-tab-group
+  mat-stretch-tabs
+  [selectedIndex]='activeTab$ | async'>
   
   <mat-tab label="Featured">
     <ng-template matTabContent>
@@ -32,20 +34,20 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab label="Favorites">
+<!--   <mat-tab label="Favorites">
     <ng-template matTabContent>
       <app-favorite-product>
-        <!-- Favorite Blends -->
+
       </app-favorite-product>
     </ng-template>
-  </mat-tab>
+  </mat-tab> -->
 
-  <mat-tab label="Previous">
+<!--   <mat-tab label="Previous">
     <ng-template matTabContent>
       <app-previous-product>
-        <!-- Previous Blends -->
+
       </app-previous-product>
     </ng-template>
-  </mat-tab>
+  </mat-tab> -->
 
 </mat-tab-group>

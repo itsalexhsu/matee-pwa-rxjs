@@ -28,6 +28,7 @@ import * as fromCheckout from '../core/reducers/checkout';
 import * as fromCart from '../core/reducers/cart';
 import * as fromLayout from '../core/reducers/layout';
 import * as fromSnackbar from '../core/reducers/snackbar';
+import * as fromProductTab from '../core/reducers/product-tab';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -38,6 +39,7 @@ export interface State {
   cart: fromCart.State;
   layout: fromLayout.State;
   snackbar: fromSnackbar.State;
+  productTab: fromProductTab.State;
   router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -51,6 +53,7 @@ export const reducers: ActionReducerMap<State> = {
   cart: fromCart.reducer,
   layout: fromLayout.reducer,
   snackbar: fromSnackbar.reducer,
+  productTab: fromProductTab.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -113,6 +116,17 @@ export const getLineItems = createSelector(
   fromCart.getLineItems
 );
 
+/**
+ * Cart Reducers
+ */
+
+export const getProductTabState = createFeatureSelector<fromProductTab.State>('productTab');
+
+export const getActiveTab = createSelector(
+  getProductTabState,
+  fromProductTab.getActiveTab
+);
+
 
 /**
  * Layout Reducers
@@ -120,9 +134,19 @@ export const getLineItems = createSelector(
 
 export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
 
+export const getShowFab = createSelector(
+  getLayoutState,
+  fromLayout.getShowFab
+);
+
 export const getAddItemButton = createSelector(
   getLayoutState,
   fromLayout.getAddItemButton
+);
+
+export const getDisableAddItemButton = createSelector(
+  getLayoutState,
+  fromLayout.getDisableAddItemButton
 );
 
 export const getShowCartButton = createSelector(

@@ -27,10 +27,13 @@ export class AppComponent {
   lineItems$: Observable<LineItem[]> = this.store.pipe(select(fromRoot.getLineItems))
   checkoutLink$: Observable<string> = this.store.pipe(select(fromRoot.getCheckoutLink))
 
+  showFab$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowFab))
   showFooter$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowFooter))
   showCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCartButton))
   showAddCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getAddItemButton))
   showCheckoutButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getShowCheckoutButton))
+
+  disableAddCartButton$: Observable<boolean> = this.store.pipe(select(fromRoot.getDisableAddItemButton))
 
   user$: Observable<CognitoUserAttribute[]> = this.store.pipe(select(fromAuth.getUserAttributes))
   isLoggedIn$: Observable<boolean> = this.store.pipe(select(fromAuth.getAuthenticated))
@@ -45,6 +48,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new layout.ShowFab)
     this.store.dispatch(new layout.ShowFooter)
     this.store.dispatch(new layout.ShowCartButton)
     this.store.dispatch(new cart.LoadCart)

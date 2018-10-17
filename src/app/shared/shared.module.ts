@@ -7,12 +7,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { MaterialModule } from '../material';
 
 // Components
-import { BlendCardComponent } from './components/blend-card/blend-card.component';
 import { IngredientCardComponent } from './components/ingredient-card/ingredient-card.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 const CONTAINER = [
-BlendCardComponent,
 IngredientCardComponent,
+ProductCardComponent,
 ]
 
 @NgModule({

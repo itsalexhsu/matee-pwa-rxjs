@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import * as cart from '../../../core/actions/cart';
 
-import * as fromEntries from '../../reducers/';
+import * as fromProducts from '../../reducers/';
 import * as product from '../../actions/product';
 import * as snackbar from '../../../core/actions/snackbar';
 
@@ -15,7 +15,8 @@ import { switchMap, map } from 'rxjs/operators';
 @Component({
   selector: 'app-featured-product',
   templateUrl: './featured-product.component.html',
-  styleUrls: ['./featured-product.component.scss']
+  styleUrls: ['./featured-product.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeaturedProductComponent {
 
@@ -40,7 +41,7 @@ export class FeaturedProductComponent {
 
   constructor(
     private shopifyService: ShopifyService,
-    private store: Store<fromEntries.State>,
+    private store: Store<fromProducts.State>,
   ) {
     
   }

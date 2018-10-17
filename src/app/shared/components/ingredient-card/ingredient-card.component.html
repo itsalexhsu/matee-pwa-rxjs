@@ -5,19 +5,23 @@
     <p *ngIf='effects'><strong>Possibly effective for: </strong>
       <span
         *ngFor="let effect of effects">
-        {{effect}},&nbsp;
+        {{effect}}
       </span>
     </p>
     <p *ngIf='flavors'>
       <strong>Flavor Profile: </strong>
       <span
         *ngFor="let flavor of flavors">
-        {{flavor}},&nbsp;
+        {{flavor}}
       </span>
     </p>
+    <mat-checkbox
+      color="primary"
+      *ngIf='showAddIngredient'
+      [checked]='isChecked'
+      (change)='onCheck($event)'>
+      Add Ingredient
+    </mat-checkbox>
   </mat-card-content>
-  <mat-card-actions>
-    <!-- <button mat-stroked-button color="primary">Add Ingredient</button> -->
-  </mat-card-actions>
 </mat-card>
 <mat-divider></mat-divider>
