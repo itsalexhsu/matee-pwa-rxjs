@@ -1,0 +1,27 @@
+<div class="header">
+  <mat-toolbar>
+    <span></span>
+    <span></span>
+    <span>
+      <button
+        mat-icon-button
+        [routerLink]="['/']">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+</div>
+
+<app-product-detail-brewing-guide
+  [product]='lambdaProduct$ | async'>
+</app-product-detail-brewing-guide>
+
+<mat-card class="mat-elevation-z0 counter">
+  <mat-card-content>
+    <mat-card-subtitle>Timer</mat-card-subtitle>
+    <h1>{{ counting ? ((counter$ | async) | date:'m:ss') : ((lambdaProduct$ | async).SteepTime | date:'m:ss') }}</h1>
+    <button
+      mat-flat-button
+      (click)='toggleCounter()'>{{ counting ? 'Stop' : 'Start' }}</button>
+  </mat-card-content>
+</mat-card>

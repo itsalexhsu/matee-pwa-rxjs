@@ -4,8 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material';
 
 import { Store, select } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { Observable, timer, interval } from 'rxjs';
 
 import * as fromProducts from '../../reducers/';
 import * as layout from '../../../core/actions/layout';
@@ -16,25 +16,29 @@ import * as lambda from '../../actions/lambda';
 import { Product, LineItem } from 'src/app/shared';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-guide',
+  templateUrl: './guide.component.html',
+  styleUrls: ['./guide.component.scss']
 })
-export class ProductComponent {
+export class GuideComponent {
 
   product$: Observable<Product> = this.store.pipe(select(fromProducts.getProductResult))
   lambdaProduct$: Observable<any> = this.store.pipe(select(fromProducts.getLambdaProductResult))
-  index: number
+
+  counter$: Observable<any> = null
+  steepTime: number
+  counting: boolean = false
 
   ngOnInit() {
-      this.store.dispatch(new layout.HideFooter())
-      this.store.dispatch(new layout.ShowAddItemButton())
-      this.store.dispatch(new productTab.SelectTab(0))
-  }
+    this.store.dispatch(new layout.ShowFooter())
 
-  ngOnDestroy() {
-      this.store.dispatch(new layout.HideAddItemButton())
-      this.store.dispatch(new layout.DisableAddItemButton)
+    this.lambdaProduct$
+    .pipe(map(payload => payload))
+    .subscribe(product => {
+      if (product) {
+        this.steepTime = product.SteepTime
+      }
+    })
   }
 
   constructor(
@@ -49,12 +53,25 @@ export class ProductComponent {
       })
 
     }
-
-  onSizeSelect(event) {
-    if (event) {
-      this.store.dispatch(new product.SelectVariant(event))
-      this.store.dispatch(new layout.EnableAddItemButton)
-    }
-  }
     
+    toggleCounter() {
+
+      if (!this.counting) {
+        let currentCount = this.steepTime
+        this.counter$ = timer(0, 1000).pipe(
+          take(currentCount),
+          map(() => {
+            if (currentCount === 0) {
+              this.counting = false
+              return 0
+            } else {
+              return currentCount -= 1000
+            }
+          })
+        )
+      }
+
+      this.counting = !this.counting
+    }
+
 }

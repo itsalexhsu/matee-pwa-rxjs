@@ -17,6 +17,8 @@ import { ProductComponent } from './containers/product/product.component';
 import { FeaturedProductComponent } from './containers/featured-product/featured-product.component';
 import { NewsComponent } from './containers/news/news.component';
 import { CreateProductComponent } from './containers/create-product/create-product.component';
+import { GuidesComponent } from './containers/guides/guides.component';
+import { GuideComponent } from './containers/guide/guide.component';
 
 //Components
 import { FavoriteProductComponent } from './components/favorite-product/favorite-product.component';
@@ -50,7 +52,9 @@ const COMPONENTS = [
   ProductDetailSummaryComponent,
   ProductDetailBrewingGuideComponent,
   ProductDetailIngredientsComponent,
-  IngredientComponent
+  IngredientComponent,
+  GuidesComponent,
+  GuideComponent,
 ]
 
 @NgModule({

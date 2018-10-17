@@ -1,0 +1,17 @@
+<div class="header">
+  <mat-toolbar>
+    <span></span>
+    <span>Matee</span>
+    <span></span>
+  </mat-toolbar>
+</div>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+    <mat-list-item
+      *ngFor="let product of products$ | async"
+      [routerLink]="['/guide', product.id]">
+      <p>{{product.title}}</p>
+    </mat-list-item>
+  </mat-card-content>
+</mat-card>

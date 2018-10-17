@@ -2,14 +2,22 @@
   <mat-card-subtitle>Brewing Guide</mat-card-subtitle>
   <mat-grid-list cols="2" rowHeight="50px">
     <mat-grid-tile
+        class='brew-grid'
         [colspan]="1"
         [rowspan]="1">
-      <p>{{product.SteepTime}} min</p>
+      <p>
+        {{product.SteepTime | date: "m:ss"}}<br>
+        <small>Steep Time</small>
+      </p>
     </mat-grid-tile>
     <mat-grid-tile
+        class='brew-grid'
         [colspan]="1"
         [rowspan]="1">
-      <p>{{product.WaterTemp}} F</p>
+      <p>
+        {{product.WaterTemp}} F<br>
+        <small>Temperature</small>
+      </p>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>

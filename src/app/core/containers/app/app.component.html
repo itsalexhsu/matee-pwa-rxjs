@@ -11,6 +11,7 @@
     <app-fab-item
         [show]='showCartButton$ | async'
         [badgeCount]='(lineItems$ | async).length'
+        [disable]='(lineItems$ | async).length === 0 ? true : false'
         routerlink='/cart'
         icon='shopping_cart'>
     </app-fab-item>

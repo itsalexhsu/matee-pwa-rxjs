@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { NewsComponent } from './products/containers/news/news.component';
+import { GuidesComponent } from './products/containers/guides/guides.component';
 import { CartComponent } from './core/containers/cart/cart.component';
 
 export const routes: Routes = [
@@ -9,5 +9,5 @@ export const routes: Routes = [
     path: 'products',
     loadChildren: './products/products.module#ProductsModule',
   },
-  { path: '**', component: NewsComponent },
+  { path: '**', component: GuidesComponent },
 ];
