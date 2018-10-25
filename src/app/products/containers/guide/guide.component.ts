@@ -26,8 +26,13 @@ export class GuideComponent {
   lambdaProduct$: Observable<any> = this.store.pipe(select(fromProducts.getLambdaProductResult))
 
   counter$: Observable<any> = null
+  
   steepTime: number
-  counting: boolean = false
+  count: number
+
+  counting: boolean
+
+  audio = new Audio('assets/audio/alarm.mp3');
 
   ngOnInit() {
     this.store.dispatch(new layout.ShowFooter())
@@ -43,7 +48,8 @@ export class GuideComponent {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private store: Store<fromProducts.State>) {
+    private store: Store<fromProducts.State>
+  ) {
 
     this.activeRoute.params
       .pipe(map(payload => payload))
@@ -52,26 +58,24 @@ export class GuideComponent {
         this.store.dispatch(new lambda.Load(params.id))
       })
 
-    }
+  }
     
-    toggleCounter() {
+  toggleCounter() {
+      this.count = this.steepTime
+      this.counter$ = timer(0, 1000).pipe(
+        take(this.count),
+        map(() => {
+          return this.count -= 1000
+        })
+      )
+  }
 
-      if (!this.counting) {
-        let currentCount = this.steepTime
-        this.counter$ = timer(0, 1000).pipe(
-          take(currentCount),
-          map(() => {
-            if (currentCount === 0) {
-              this.counting = false
-              return 0
-            } else {
-              return currentCount -= 1000
-            }
-          })
-        )
-      }
-
-      this.counting = !this.counting
+  toggleAlarm() {
+    if (this.counting === false) {
+      this.audio.pause()
+    } else {
+      this.audio.play()
     }
+  }
 
 }

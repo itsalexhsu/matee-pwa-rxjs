@@ -37,6 +37,7 @@ import { reducers } from './reducers';
 import { routes } from './routes';
 
 import { SharedModule } from '../shared/shared.module';
+import { TimerDirective } from './directives/timer.directive';
 
 const COMPONENTS = [
   ArchiveConfirmationComponent,
@@ -67,7 +68,7 @@ const COMPONENTS = [
     StoreModule.forFeature('products', reducers),
     EffectsModule.forFeature([ProductsEffects, LambdaProductsEffects, IngredientEffects]),
   ],
-  declarations: [COMPONENTS],
+  declarations: [COMPONENTS, TimerDirective],
   exports: [COMPONENTS],
   entryComponents: [ArchiveConfirmationComponent],
 })

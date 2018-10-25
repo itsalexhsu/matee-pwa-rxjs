@@ -13,6 +13,7 @@ export class IngredientCardComponent {
   @Input() flavors
   @Input() showAddIngredient: boolean
   @Input() isChecked: boolean
+  @Input() coo: string
 
   @Output() onIngredientCheck = new EventEmitter()
 

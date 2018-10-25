@@ -43,6 +43,12 @@ export class IngredientComponent {
     }
   }
 
+  get coo() {
+    if (this.ingredient) {
+      return this.ingredient.COO
+    }
+  }
+
   onCheck(event) {
     let payload = { ingredient: this.ingredient, checked: event.checked}
     this.onIngredientCheck.emit(payload)

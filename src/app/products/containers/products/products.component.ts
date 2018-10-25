@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new product.List())
-    this.store.dispatch(new layout.HideFooter())
+    this.store.dispatch(new layout.ShowFooter())
     this.store.dispatch(new layout.ShowCartButton())
   }
 

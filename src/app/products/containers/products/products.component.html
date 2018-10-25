@@ -3,25 +3,31 @@
     <span></span>
     <span>Orders</span>
     <span>
-      <button
+      <!-- <button
         mat-icon-button
         [routerLink]="['/']">
         <mat-icon>close</mat-icon>
-      </button>
+      </button> -->
     </span>
   </mat-toolbar>
 </div>
 
-<mat-tab-group
+<app-featured-product
+  *ngFor="let product of products$ | async"
+  [product]='product'>
+
+</app-featured-product>
+
+<!-- <mat-tab-group
   mat-stretch-tabs
-  [selectedIndex]='activeTab$ | async'>
+  [selectedIndex]='activeTab$ | async'> -->
   
-  <mat-tab label="Featured">
+<!--   <mat-tab label="Featured">
     <ng-template matTabContent>
       <app-featured-product
         *ngFor="let product of products$ | async"
         [product]='product'>
-        <!-- Featured Blends -->
+
       </app-featured-product>
     </ng-template>
   </mat-tab>
@@ -29,10 +35,10 @@
   <mat-tab label="Create">
     <ng-template matTabContent>
       <app-create-product>
-        <!-- Create Blends -->
+
       </app-create-product>
     </ng-template>
-  </mat-tab>
+  </mat-tab> -->
 
 <!--   <mat-tab label="Favorites">
     <ng-template matTabContent>
@@ -50,4 +56,4 @@
     </ng-template>
   </mat-tab> -->
 
-</mat-tab-group>
+<!-- </mat-tab-group> -->

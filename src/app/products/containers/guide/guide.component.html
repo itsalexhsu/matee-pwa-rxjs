@@ -1,7 +1,7 @@
 <div class="header">
   <mat-toolbar>
     <span></span>
-    <span></span>
+    <span><img src='/assets/images/logo.png' width='30'></span>
     <span>
       <button
         mat-icon-button
@@ -16,12 +16,34 @@
   [product]='lambdaProduct$ | async'>
 </app-product-detail-brewing-guide>
 
-<mat-card class="mat-elevation-z0 counter">
+<mat-card class="mat-elevation-z0 center">
   <mat-card-content>
     <mat-card-subtitle>Timer</mat-card-subtitle>
-    <h1>{{ counting ? ((counter$ | async) | date:'m:ss') : ((lambdaProduct$ | async).SteepTime | date:'m:ss') }}</h1>
+    <h1>{{ ((lambdaProduct$ | async).SteepTime | date:'m:ss') }}</h1>
     <button
       mat-flat-button
-      (click)='toggleCounter()'>{{ counting ? 'Stop' : 'Start' }}</button>
+      (click)='toggleCounter(); counting = true'>
+      Start
+    </button>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+</mat-card>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
+    <mat-card-subtitle>About {{ (product$ | async).title }}</mat-card-subtitle>
+    <p>{{ (product$ | async).description }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mat-elevation-z0 counter center" *ngIf='counting === true'>
+  <mat-card-content>
+    <p class="number">{{ ((counter$ | async) | date:'m:ss') }}</p>
+    <button
+      mat-button
+      color="warn"
+      (click)='toggleCounter(); counting = false'>
+      Stop
+    </button>
   </mat-card-content>
 </mat-card>

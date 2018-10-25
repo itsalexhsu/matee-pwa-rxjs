@@ -1,17 +1,25 @@
 <div class="header">
   <mat-toolbar>
     <span></span>
-    <span>Matee</span>
+    <span><img src='/assets/images/logo.png' width='30'></span>
     <span></span>
   </mat-toolbar>
 </div>
 
 <mat-card class="mat-elevation-z0">
   <mat-card-content>
+    <h2>Brewing Guide</h2>
+    <p>Select one of the following blends to make the perfect cup of Matee blend</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mat-elevation-z0">
+  <mat-card-content>
     <mat-list-item
       *ngFor="let product of products$ | async"
       [routerLink]="['/guide', product.id]">
-      <p>{{product.title}}</p>
+      <h4>{{product.title}}</h4>
+      <mat-divider></mat-divider>
     </mat-list-item>
   </mat-card-content>
 </mat-card>
