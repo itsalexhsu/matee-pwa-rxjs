@@ -61,21 +61,29 @@ export class GuideComponent {
   }
     
   toggleCounter() {
-      this.count = this.steepTime
+      // this.count = this.steepTime
+      this.count = 2000
       this.counter$ = timer(0, 1000).pipe(
         take(this.count),
         map(() => {
-          return this.count -= 1000
+          if (this.count === 0) {
+            this.alarmOn()
+            return this.count = 0
+          } else {
+            return this.count -= 1000
+          }
         })
       )
   }
 
-  toggleAlarm() {
-    if (this.counting === false) {
-      this.audio.pause()
-    } else {
+  alarmOn() {
+    if (!this.audio.play()) {
       this.audio.play()
     }
+  }
+
+  alarmOff() {
+    this.audio.pause()
   }
 
 }
