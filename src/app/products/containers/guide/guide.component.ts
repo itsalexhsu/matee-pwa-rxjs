@@ -61,8 +61,7 @@ export class GuideComponent {
   }
     
   toggleCounter() {
-      // this.count = this.steepTime
-      this.count = 2000
+      this.count = this.steepTime
       this.counter$ = timer(0, 1000).pipe(
         take(this.count),
         map(() => {
